@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rod Rey RJ | Portafolio Profesional</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* VARIABLES DE COLOR - POR DEFECTO: TEMA OSCURO */
+        :root {
+            --bg-color: #121212;
+            --text-color: #E0E0E0;
+            --primary-color: #00ADB5; 
+            --secondary-color: #393E46; 
+            --highlight-color: #FF5722; 
+            --ring-size: 350px; 
+            --icon-size: 55px; 
+            --card-bg: #222831; 
+            --section-bg: #1A1A1A;
+            --whatsapp-color: #25D366;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --header-height: 60px;
+            --logo-font-size: 1.5em; 
+        }
+
+        /* TEMA CLARO */
+        body.light-mode {
+            --bg-color: #F8F8F8;
+            --text-color: #333333;
+            --primary-color: #1A73E8; 
+            --secondary-color: #FFFFFF; 
+            --highlight-color: #FF5722;
+            --card-bg: #FFFFFF;
+            --section-bg: #EEEEEE;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* BASE Y RESETEO DE ESTILOS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; 
+            transition: background-color 0.4s, color 0.4s; 
+        }
+        body {
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden; 
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* AJUSTES PARA SCROLL SPY Y ANCLAS (Todas las secciones *excepto* Hero) */
+        section {
+            padding: 80px 0;
+            padding-top: calc(80px + var(--header-height)); 
+            margin-top: calc(-1 * var(--header-height)); 
+        }
+        /* CORRECCIÓN: El Hero debe ser visible al inicio */
+        #hero {
+            padding-top: 50px; 
+            margin-top: 0; 
+            padding-bottom: 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+        }
+
+        /* --- EFECTO DE APARICIÓN AL SCROLL (BONITO y SUTIL) --- */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(15px); 
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; 
+        }
+        .scroll-animate.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* --- HEADER & NAVEGACIÓN --- */
+        header {
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        .logo a {
+            /* CORRECCIÓN: Tamaño de fuente para que no se corte */
+            font-size: var(--logo-font-size); 
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-left: -5px; 
+            padding-left: 5px;
+        }
+        
+        /* Visibilidad de enlaces de PC */
+        .nav-links {
+            display: flex; 
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-left: 5px;
+            font-weight: 400;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 2px solid transparent; 
+        }
+        .nav-links a.active-scroll {
+            color: var(--highlight-color);
+            border-bottom: 2px solid var(--highlight-color);
+        }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Diseño de botón Día/Noche */
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: var(--primary-color); 
+            cursor: pointer;
+            margin-left: 20px;
+            padding: 5px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .theme-toggle:hover {
+            color: var(--highlight-color);
+            transform: scale(1.1);
+        }
+        
+        /* Controles Móviles (Tema + Hamburguesa) */
+        .mobile-header-controls {
+            display: none; 
+            align-items: center;
+        }
+        .hamburger {
+            cursor: pointer;
+            font-size: 2em;
+            color: var(--text-color);
+            margin-left: 15px;
+        }
+
+        /* Menú Desplegable (Móvil) */
+        .mobile-menu {
+            display: none; 
+            flex-direction: column;
+            background-color: var(--secondary-color);
+            position: absolute;
+            top: var(--header-height); 
+            left: 0;
+            width: 100%;
+            box-shadow: 0 4px 5px var(--shadow-color);
+            z-index: 999;
+        }
+        .mobile-menu.active {
+            display: flex; 
+        }
+        .mobile-menu a {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--section-bg);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        /* Media Query para Móviles */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+            }
+            .mobile-header-controls { 
+                display: flex; 
+            }
+            
+            #theme-toggle-pc { 
+                display: none; 
+            } 
+            #theme-toggle-mobile-header { 
+                margin-left: 0; 
+            } 
+            .logo a {
+                font-size: 1.3em;
+            }
+        }
+
+        /* --- SECCIÓN HERO (PORTADA ORIGINAL) --- */
+        #hero {
+            text-align: center;
+            overflow: hidden; 
+            background-color: var(--bg-color); 
+        }
+        
+        @media (max-width: 480px) {
+            :root {
+                --ring-size: 300px;
+                --icon-size: 45px;
+            }
+            .intro h1 { font-size: 2.5em; }
+            .typed-container { font-size: 1.2em; }
+        }
+
+        .profile-area { position: relative; display: inline-block; margin-bottom: 50px; }
+        .profile-pic { background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); background-size: cover; background-position: center; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary-color); box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); position: relative; z-index: 10; }
+        .tech-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: var(--ring-size); height: var(--ring-size); animation: spin 30s linear infinite; }
+        .tech-icon { 
+            position: absolute; 
+            width: var(--icon-size); 
+            height: var(--icon-size); 
+            border-radius: 50%; 
+            background-color: var(--card-bg); /* Usamos card-bg para más contraste */
+            color: var(--text-color); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 1.5em; 
+            border: 2px solid var(--primary-color); 
+            box-shadow: 0 0 10px var(--shadow-color); 
+            animation: reverse-spin 30s linear infinite; 
+        }
+        
+        /* Posicionamiento del anillo */
+        .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } 
+        .tech-icon:nth-child(2) { top: 13%; right: 13%; } 
+        .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } 
+        .tech-icon:nth-child(4) { bottom: 13%; right: 13%; } 
+        .tech-icon:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); } 
+        .tech-icon:nth-child(6) { bottom: 13%; left: 13%; } 
+        .tech-icon:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); } 
+        .tech-icon:nth-child(8) { top: 13%; left: 13%; } 
+
+        @keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+        @keyframes reverse-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+        .intro h1 { font-size: 3em; margin-bottom: 5px; }
+        .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
+        .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
+        @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
+        
+        .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
+        .cta-buttons a:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
+
+        /* --- SECCIONES INTERMEDIAS --- */
+        #servicios { background-color: var(--section-bg); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px var(--shadow-color); }
+        .service-card .service-icon { font-size: 3em; color: var(--primary-color); margin-bottom: 15px; display: block; }
+        .service-card h3 { color: var(--primary-color); font-size: 1.5em; margin-bottom: 10px; }
+        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
+        .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
+        .whatsapp-button:hover { background-color: #128C7E; }
+
+        #proyectos { background-color: var(--bg-color); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 4px var(--shadow-color); overflow: hidden; text-align: center; transition: box-shadow 0.3s; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--primary-color); transition: transform 0.5s; }
+        .project-card:hover img { transform: scale(1.05); }
+        .project-info { padding: 15px; }
+        .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
+        .project-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
+        .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
+        .project-info a:hover { background-color: var(--highlight-color); }
+
+        #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
+        .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+        .contact-item { display: flex; align-items: center; font-size: 1.1em; }
+        .contact-item i { font-size: 1.5em; color: var(--primary-color); margin-right: 10px; }
+        .contact-item a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
+        .contact-item a:hover { color: var(--highlight-color); }
+        
+        footer { 
+            text-align: center;
+            padding: 20px 0;
+            background-color: var(--secondary-color);
+            border-top: 1px solid var(--section-bg);
+            color: var(--text-color); 
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body id="body">
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><a href="#hero">Rod Rey RJ</a></div>
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link" data-target="hero">Inicio</a>
+                    <a href="#servicios" class="nav-link" data-target="servicios">Servicios</a>
+                    <a href="#proyectos" class="nav-link" data-target="proyectos">Proyectos</a>
+                    <a href="#contacto" class="nav-link" data-target="contacto">Contacto</a>
+                    <button id="theme-toggle-pc" class="theme-toggle" aria-label="Cambiar modo de tema">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+                
+                <div class="mobile-header-controls">
+                    <button id="theme-toggle-mobile-header" class="theme-toggle" aria-label="Cambiar modo de tema" style="font-size: 1.5em;">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="hamburger" id="hamburger-menu"><i class="fas fa-bars"></i></div>
+                </div>
+            </nav>
+            <div class="mobile-menu" id="mobile-links">
+                <a href="#hero">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container"> 
+            <div class="profile-area">
+                <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
+                
+                <div class="tech-ring">
+                    <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
+                    <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt" style="color:#264de4;"></i></div>
+                    <div class="tech-icon" title="JavaScript"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
+                    <div class="tech-icon" title="Vercel Hosting"><i class="fas fa-cloud"></i></div> 
+                    <div class="tech-icon" title="Node.js"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
+                    <div class="tech-icon" title="Excel / Análisis"><i class="fas fa-table" style="color:#107C41;"></i></div>
+                    <div class="tech-icon" title="Técnico de Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
+                    <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
+                </div>
+                
+            </div>
+            
+            <div class="intro">
+                <h1>Hola, Soy <span style="color: var(--primary-color);">Rod Rey RJ</span></h1>
+                
+                <div class="typed-container">
+                    <span id="typed-text"></span>
+                </div>
+                
+                <p style="font-size: 1.1em; max-width: 600px; margin: 0 auto 30px;">
+                    Experto en soluciones tecnológicas integrales, desde la creación de sitios web dinámicos hasta la optimización de sistemas y estrategias de marketing online.
+                </p>
+            </div>
+            <div class="cta-buttons">
+                <a href="#servicios">Ver Servicios</a>
+                <a href="#proyectos" style="background-color: var(--highlight-color);">Ver Proyectos <i class="fas fa-code"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <div class="container">
+            <h2 class="section-title scroll-animate">Nuestros Servicios</h2>
+            <div class="services-grid">
+                
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-laptop-code service-icon"></i>
+                    <h3>Diseño Web</h3>
+                    <p>Diseño profesional y responsivo para tu negocio o marca personal.</p>
+                    <div class="price">250 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20Web%20(250%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-palette service-icon"></i>
+                    <h3>Diseño de Poster</h3>
+                    <p>Creación de posters atractivos para eventos o publicidad.</p>
+                    <div class="price">150 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20de%20Poster%20(150%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-vector-square service-icon"></i>
+                    <h3>Diseño de Logos</h3>
+                    <p>Logotipos originales y memorables para tu identidad de marca.</p>
+                    <div class="price">50 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20de%20Logos%20(50%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-bullhorn service-icon"></i>
+                    <h3>Promociones (Mensual)</h3>
+                    <p>Gestión y promoción de contenido y redes sociales por un mes.</p>
+                    <div class="price">500 CUP/mes</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Promociones%20Mensuales%20(500%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-terminal service-icon"></i>
+                    <h3>Instalación Windows/Linux</h3>
+                    <p>Instalación limpia y configuración de sistemas operativos.</p>
+                    <div class="price">1000 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20la%20Instalación%20de%20Sistemas%20Operativos%20(1000%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+                
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h3>Desbloqueo Cuentas Google (Móvil)</h3>
+                    <p>Eliminación de la protección de cuenta de Google (FRP) en móviles.</p>
+                    <div class="price">1000 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20Desbloqueo%20de%20Cuenta%20Google%20en%20Móvil%20(1000%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+                
+                <div class="service-card scroll-animate">
+                    <i class="fas fa-lock-open service-icon"></i>
+                    <h3>Eliminación de Contraseñas (Móvil/PC)</h3>
+                    <p>Eliminación o reseteo de contraseñas de móviles o PC.</p>
+                    <div class="price">500 CUP</div>
+                    <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20la%20Eliminación%20de%20Contraseñas%20(500%20CUP)." class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Reservar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyectos">
+        <div class="container">
+            <h2 class="section-title scroll-animate">Nuestros Proyectos</h2>
+            <div class="projects-grid" id="projects-container">
+                <p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);" class="scroll-animate">Cargando proyectos desde Google Sheets...</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div class="container">
+            <h2 class="section-title scroll-animate" style="color: var(--text-color);">Contacto</h2>
+            <div class="contact-info scroll-animate">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+5356639178">56639178</a> (Móvil)
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/5356639178" target="_blank">56639178</a> (WhatsApp)
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:rodreyrj@gmail.com">rodreyrj@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/rodreyrj?igsh=MWV0OTh0cGE3M2EzbA==" target="_blank">@rodreyrj</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Rod Rey RJ. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // =========================================================
+        // === 1. CONFIGURACIÓN DE DATOS ===
+        // =========================================================
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
+        const PROJECTS_CONTAINER = document.getElementById('projects-container');
+        const NAV_LINKS = document.querySelectorAll('.nav-link');
+        const SECTIONS = document.querySelectorAll('section'); 
+        const body = document.getElementById('body');
+        const themeTogglePC = document.getElementById('theme-toggle-pc');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
+        const hamburger = document.getElementById('hamburger-menu');
+        const mobileLinks = document.getElementById('mobile-links');
+
+
+        // =========================================================
+        // === 2. LÓGICA DE MODO DÍA/NOCHE ===
+        // =========================================================
+        function toggleTheme() {
+            body.classList.toggle('light-mode');
+            const isLightMode = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+            updateThemeIcon(isLightMode);
+        }
+
+        function updateThemeIcon(isLight) {
+            const iconClass = isLight ? 'fa-moon' : 'fa-sun';
+            
+            [themeTogglePC, themeToggleMobile].forEach(btn => {
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    icon.classList.remove('fa-sun', 'fa-moon');
+                    icon.classList.add(iconClass);
+                }
+            });
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+                updateThemeIcon(true);
+            } else {
+                updateThemeIcon(false);
+            }
+        }
+        
+        // =========================================================
+        // === 3. LÓGICA DE PARSEO DE CSV & RENDERIZADO ===
+        // =========================================================
+        function parseCSV(text) {
+            const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+            if (lines.length <= 1) return []; 
+            const dataRows = lines.slice(1); 
+            const projectsData = [];
+            dataRows.forEach(line => {
+                const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; 
+                if (columns.length >= 3) { 
+                    const cleanColumn = col => String(col).trim().replace(/^"|"$/g, '');
+                    const project = {
+                        imagen: cleanColumn(columns[0]), 
+                        nombre: cleanColumn(columns[1]), 
+                        host: cleanColumn(columns[2])    
+                    };
+                    if (project.imagen && project.nombre && project.host) {
+                        projectsData.push(project);
+                    }
+                }
+            });
+            return projectsData;
+        }
+
+        function renderProjects(proyectos) {
+            PROJECTS_CONTAINER.innerHTML = ''; 
+
+            if (proyectos.length === 0) {
+                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);" class="scroll-animate">Actualmente no hay proyectos disponibles en la tabla.</p>';
+                document.querySelector('#projects-container .scroll-animate').classList.add('appear');
+                return;
+            }
+
+            proyectos.forEach(proyecto => {
+                const card = document.createElement('div');
+                card.classList.add('project-card', 'scroll-animate'); 
+                
+                card.innerHTML = `
+                    <img src="${proyecto.imagen}" 
+                         alt="Imagen del proyecto ${proyecto.nombre}"
+                         loading="lazy"    
+                         decoding="async"> 
+                    <div class="project-info">
+                        <h4>${proyecto.nombre}</h4>
+                        <p style="font-size: 0.85em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Host: ${proyecto.host}</p>
+                        <a href="${proyecto.host}" target="_blank">Ver Proyecto <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                `;
+                PROJECTS_CONTAINER.appendChild(card);
+            });
+            initScrollAnimations(); 
+        }
+
+        async function fetchAndRenderProjects() {
+            PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--primary-color);" class="scroll-animate">Cargando proyectos desde Google Sheets...</p>';
+            
+            try {
+                const response = await fetch(CSV_URL);
+                if (!response.ok) {
+                    throw new Error('Error al cargar la hoja de Google Sheets. Código: ' + response.status);
+                }
+                const csvText = await response.text();
+                const proyectos = parseCSV(csvText);
+                renderProjects(proyectos);
+
+            } catch (error) {
+                console.error("Fallo al cargar los proyectos:", error);
+                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);" class="scroll-animate">❌ Error al cargar proyectos.</p>';
+                document.querySelector('#projects-container .scroll-animate').classList.add('appear');
+            }
+        }
+
+        // --- Efecto de Escritura (Typewriter) ---
+
+        const typedTextSpan = document.getElementById("typed-text");
+        const roles = ["Desarrollador Web Full Stack", "Especialista en Marketing Digital", "Técnico de Sistemas Certificado"];
+        const typingDelay = 100;
+        const eraseDelay = 50;  
+        const newTextDelay = 2000;
+        let roleIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < roles[roleIndex].length) {
+                typedTextSpan.textContent += roles[roleIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typedTextSpan.textContent = roles[roleIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, eraseDelay);
+            } else {
+                roleIndex++;
+                if(roleIndex >= roles.length) roleIndex = 0;
+                setTimeout(type, typingDelay + 500); 
+            }
+        }
+
+        // =========================================================
+        // === 4. SCROLL SPY (Resaltado de Menú) ===
+        // =========================================================
+        let isScrollingFromClick = false; 
+
+        function scrollSpy() {
+            if (isScrollingFromClick) return;
+
+            const offset = 60; 
+            let currentSectionId = 'hero'; 
+            
+            for (let i = SECTIONS.length - 1; i >= 0; i--) {
+                const section = SECTIONS[i];
+                if (section.getBoundingClientRect().top <= offset) { 
+                    currentSectionId = section.getAttribute('id');
+                    break; 
+                }
+            }
+
+            NAV_LINKS.forEach(a => {
+                a.classList.remove('active-scroll');
+                if (a.getAttribute('data-target') === currentSectionId) {
+                    a.classList.add('active-scroll');
+                }
+            });
+        }
+        
+        // =========================================================
+        // === 5. ANIMACIÓN DE APARICIÓN AL SCROLL (BONITO) ===
+        // =========================================================
+        let observer;
+
+        function initScrollAnimations() {
+            if (observer) observer.disconnect(); 
+
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            
+            animatedElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) {
+                    el.classList.add('appear');
+                }
+            });
+
+            const options = {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.1 
+            };
+
+            observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // =========================================================
+        // === 6. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
+        // =========================================================
+
+        // Activar/desactivar el menú móvil
+        hamburger.addEventListener('click', () => {
+            mobileLinks.classList.toggle('active');
+        });
+
+        // Eventos de botones de modo día/noche
+        if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Manejar el clic en enlaces de menú (PC y Móvil)
+        document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                isScrollingFromClick = true; 
+                mobileLinks.classList.remove('active'); // Cerrar el menú móvil al hacer clic
+
+                const targetId = this.getAttribute('href').substring(1);
+                NAV_LINKS.forEach(a => a.classList.remove('active-scroll'));
+                const pcLink = document.querySelector(`.nav-link[data-target="${targetId}"]`);
+                if (pcLink) {
+                    pcLink.classList.add('active-scroll');
+                }
+                
+                // Reactivar el Scroll Spy después del desplazamiento suave
+                setTimeout(() => {
+                    isScrollingFromClick = false;
+                    scrollSpy(); 
+                }, 800); 
+            });
+        });
+        
+        window.addEventListener('scroll', scrollSpy);
+
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTheme();
+            fetchAndRenderProjects();
+            if(roles.length) setTimeout(type, 1500);
+            scrollSpy(); 
+            initScrollAnimations();
+        });
+    </script>
+</body>
+</html>
