@@ -23,8 +23,12 @@
             --whatsapp-color: #25D366;
             --shadow-color: rgba(0, 0, 0, 0.2);
             --header-height: 60px;
-            /* **IMPORTANTE** Ajuste para que el texto del logo no se salga en móviles */
             --logo-font-size: 1.5em; 
+
+            /* Ajustes para el cálculo exacto del centrado del anillo - **Mantenido de tu original** */
+            --ring-radius: calc(var(--ring-size) / 2);
+            --half-icon: calc(var(--icon-size) / 2);
+            --position-offset: calc(var(--ring-radius) - var(--half-icon));
         }
 
         /* TEMA CLARO */
@@ -61,19 +65,17 @@
             padding: 20px 0;
         }
         
-        /* AJUSTES PARA SCROLL SPY Y ANCLAS (Todas las secciones *excepto* Hero) */
+        /* AJUSTES PARA SCROLL SPY Y ANCLAS */
         section {
             padding: 80px 0;
-            /* Margen superior negativo para que el ancla (ID) de la sección se posicione 
-               justo debajo del header pegajoso, no en la parte superior de la ventana. */
             padding-top: calc(80px + var(--header-height)); 
             margin-top: calc(-1 * var(--header-height)); 
         }
-        /* **CORRECCIÓN CLAVE 1:** El Hero es la primera sección, queremos que se vea arriba del todo. */
         #hero {
-            padding-top: 50px; /* Un padding más pequeño solo para el contenido del hero */
-            margin-top: 0; /* Asegura que comienza en la parte superior, justo después del header */
+            padding-top: 50px; 
+            margin-top: 0; 
             padding-bottom: 50px;
+            text-align: center;
         }
 
         .section-title {
@@ -83,7 +85,7 @@
             margin-bottom: 40px;
         }
 
-        /* --- EFECTO DE APARICIÓN AL SCROLL (BONITO y SUTIL) --- */
+        /* --- EFECTO DE APARICIÓN AL SCROLL --- */
         .scroll-animate {
             opacity: 0;
             transform: translateY(15px); 
@@ -94,7 +96,7 @@
             transform: translateY(0);
         }
         
-        /* --- HEADER & NAVEGACIÓN --- */
+        /* --- HEADER & NAVEGACIÓN (MANTENIDO) --- */
         header {
             background-color: var(--secondary-color);
             box-shadow: 0 4px 10px var(--shadow-color);
@@ -110,17 +112,14 @@
             height: 100%;
         }
         .logo a {
-            /* **CORRECCIÓN CLAVE 2:** Reducción del tamaño de fuente para evitar el corte en móvil */
             font-size: var(--logo-font-size); 
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
-            /* Ajuste de margen para que no choque con el borde de la pantalla */
             margin-left: -5px; 
             padding-left: 5px;
         }
         
-        /* Visibilidad de enlaces de PC */
         .nav-links {
             display: flex; 
             align-items: center;
@@ -142,7 +141,6 @@
             color: var(--primary-color);
         }
 
-        /* Diseño de botón Día/Noche */
         .theme-toggle {
             background: none;
             border: none;
@@ -158,7 +156,6 @@
             transform: scale(1.1);
         }
         
-        /* Controles Móviles (Tema + Hamburguesa) */
         .mobile-header-controls {
             display: none; 
             align-items: center;
@@ -169,8 +166,6 @@
             color: var(--text-color);
             margin-left: 15px;
         }
-
-        /* Menú Desplegable (Móvil) */
         .mobile-menu {
             display: none; 
             flex-direction: column;
@@ -195,46 +190,24 @@
         
         /* Media Query para Móviles */
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-            }
-            .mobile-header-controls { 
-                display: flex; 
-            }
-            
-            #theme-toggle-pc { 
-                display: none; 
-            } 
-            #theme-toggle-mobile-header { 
-                margin-left: 0; 
-            } 
-            /* Reducir aún más el logo si es necesario en pantallas muy pequeñas */
-            .logo a {
-                font-size: 1.3em;
-            }
+            .nav-links { display: none; }
+            .mobile-header-controls { display: flex; }
+            #theme-toggle-pc { display: none; } 
+            #theme-toggle-mobile-header { margin-left: 0; } 
         }
 
-        /* --- SECCIÓN HERO (PORTADA ORIGINAL) --- */
-        #hero {
-            text-align: center;
-            overflow: hidden; 
-            background-color: var(--bg-color); 
-        }
-        
-        /* Ajustes para el anillo en pantallas pequeñas */
-        @media (max-width: 480px) {
-            :root {
-                --ring-size: 300px;
-                --icon-size: 45px;
-            }
-            .intro h1 { font-size: 2.5em; }
-            .typed-container { font-size: 1.2em; }
-        }
-
+        /* --- SECCIÓN HERO (MANTENIDO) --- */
+        #hero { text-align: center; overflow: hidden; background-color: var(--bg-color); }
         .profile-area { position: relative; display: inline-block; margin-bottom: 50px; }
-        .profile-pic { background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); background-size: cover; background-position: center; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary-color); box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); position: relative; z-index: 10; }
+        .profile-pic { 
+            /* Imagen del traje oscuro restaurada */
+            background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); 
+            background-size: cover; background-position: center; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary-color); box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); position: relative; z-index: 10; 
+        }
         .tech-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: var(--ring-size); height: var(--ring-size); animation: spin 30s linear infinite; }
         .tech-icon { position: absolute; width: var(--icon-size); height: var(--icon-size); border-radius: 50%; background-color: var(--secondary-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; font-size: 1.5em; border: 2px solid var(--primary-color); box-shadow: 0 0 10px var(--shadow-color); animation: reverse-spin 30s linear infinite; }
+        
+        /* Posiciones de Iconos (Tu original) */
         .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } 
         .tech-icon:nth-child(2) { top: 13%; right: 13%; } 
         .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } 
@@ -255,7 +228,7 @@
         .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
         .cta-buttons a:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
 
-        /* --- SECCIONES INTERMEDIAS --- */
+        /* --- SECCIÓN SERVICIOS (MANTENIDO) --- */
         #servicios { background-color: var(--section-bg); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
@@ -266,17 +239,86 @@
         .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
         .whatsapp-button:hover { background-color: #128C7E; }
 
+        /* --- ESTILOS DE PROYECTOS (Ventana de PC) --- */
         #proyectos { background-color: var(--bg-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .project-card { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 4px var(--shadow-color); overflow: hidden; text-align: center; transition: box-shadow 0.3s; }
-        .project-card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--primary-color); transition: transform 0.5s; }
-        .project-card:hover img { transform: scale(1.05); }
+        
+        .project-card { 
+            background-color: var(--card-bg); 
+            /* Esquinas redondeadas de la ventana */
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra intensa para simular profundidad */
+            overflow: hidden; 
+            text-align: center; 
+            position: relative; 
+            padding-top: 30px; /* Espacio para los puntos de control */
+            transition: box-shadow 0.3s;
+        }
+        .project-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
+
+        /* Barra superior de la ventana */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            /* Fondo ligeramente más claro o distinto para la barra */
+            background-color: rgba(34, 40, 49, 0.7); 
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            z-index: 5;
+        }
+
+        /* Puntos de control (Cerrar, Minimizar, Maximizar) */
+        .project-card-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 15;
+            display: flex;
+            gap: 7px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: default;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        /* Icono de corona */
+        .crown-icon {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1.5em;
+            color: #ffd700; /* Dorado de la corona */
+            z-index: 15;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-bottom: 3px solid var(--primary-color); 
+            transition: transform 0.5s; 
+        }
+        .project-card:hover img { 
+            transform: scale(1.03); /* Escala ligeramente menor para mantener el efecto de ventana */
+        }
         .project-info { padding: 15px; }
         .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
         .project-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
         .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
         .project-info a:hover { background-color: var(--highlight-color); }
+        /* FIN ESTILOS DE PROYECTOS */
 
+        /* --- SECCIÓN CONTACTO Y FOOTER (MANTENIDO) --- */
         #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
         .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
         .contact-item { display: flex; align-items: center; font-size: 1.1em; }
@@ -492,9 +534,7 @@
         const mobileLinks = document.getElementById('mobile-links');
 
 
-        // =========================================================
-        // === 2. LÓGICA DE MODO DÍA/NOCHE ===
-        // =========================================================
+        // (Funciones toggleTheme, updateThemeIcon, loadTheme, parseCSV - MANTENIDAS)
         function toggleTheme() {
             body.classList.toggle('light-mode');
             const isLightMode = body.classList.contains('light-mode');
@@ -525,9 +565,6 @@
             }
         }
         
-        // =========================================================
-        // === 3. LÓGICA DE PARSEO DE CSV & RENDERIZADO ===
-        // =========================================================
         function parseCSV(text) {
             const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
             if (lines.length <= 1) return []; 
@@ -550,6 +587,9 @@
             return projectsData;
         }
 
+        // =========================================================
+        // === 3. LÓGICA DE RENDERIZADO (MODIFICADA para Ventana de PC) ===
+        // =========================================================
         function renderProjects(proyectos) {
             PROJECTS_CONTAINER.innerHTML = ''; 
 
@@ -563,7 +603,15 @@
                 const card = document.createElement('div');
                 card.classList.add('project-card', 'scroll-animate'); 
                 
+                // **AÑADIDO: HTML para los controles de Ventana de PC**
                 card.innerHTML = `
+                    <div class="project-card-controls">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="crown-icon"><i class="fas fa-crown"></i></div>
+                    
                     <img src="${proyecto.imagen}" 
                          alt="Imagen del proyecto ${proyecto.nombre}"
                          loading="lazy"    
@@ -599,7 +647,6 @@
         }
 
         // --- Efecto de Escritura (Typewriter) ---
-
         const typedTextSpan = document.getElementById("typed-text");
         const roles = ["Desarrollador Web Full Stack", "Especialista en Marketing Digital", "Técnico de Sistemas Certificado"];
         const typingDelay = 100;
@@ -631,13 +678,12 @@
         }
 
         // =========================================================
-        // === 4. SCROLL SPY (Resaltado de Menú) ===
+        // === 4. SCROLL SPY, ANIMACIÓN & INICIALIZACIÓN (MANTENIDOS) ===
         // =========================================================
         let isScrollingFromClick = false; 
 
         function scrollSpy() {
             if (isScrollingFromClick) return;
-
             const offset = 60; 
             let currentSectionId = 'hero'; 
             
@@ -657,14 +703,10 @@
             });
         }
         
-        // =========================================================
-        // === 5. ANIMACIÓN DE APARICIÓN AL SCROLL (BONITO) ===
-        // =========================================================
         let observer;
 
         function initScrollAnimations() {
             if (observer) observer.disconnect(); 
-
             const animatedElements = document.querySelectorAll('.scroll-animate');
             
             animatedElements.forEach(el => {
@@ -673,11 +715,7 @@
                 }
             });
 
-            const options = {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
+            const options = { root: null, rootMargin: '0px', threshold: 0.1 };
 
             observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -688,29 +726,20 @@
                 });
             }, options);
 
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
+            animatedElements.forEach(el => { observer.observe(el); });
         }
 
-        // =========================================================
-        // === 6. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
-        // =========================================================
-
-        // Activar/desactivar el menú móvil
+        // Eventos de botones y enlaces
         hamburger.addEventListener('click', () => {
             mobileLinks.classList.toggle('active');
         });
-
-        // Eventos de botones de modo día/noche
         if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
         if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
         
-        // Manejar el clic en enlaces de menú (PC y Móvil)
         document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 isScrollingFromClick = true; 
-                mobileLinks.classList.remove('active'); // Cerrar el menú móvil al hacer clic
+                mobileLinks.classList.remove('active'); 
 
                 const targetId = this.getAttribute('href').substring(1);
                 NAV_LINKS.forEach(a => a.classList.remove('active-scroll'));
@@ -719,7 +748,6 @@
                     pcLink.classList.add('active-scroll');
                 }
                 
-                // Reactivar el Scroll Spy después del desplazamiento suave
                 setTimeout(() => {
                     isScrollingFromClick = false;
                     scrollSpy(); 
