@@ -24,7 +24,7 @@
             --shadow-color: rgba(0, 0, 0, 0.2);
             --header-height: 60px;
 
-            /* Variables para estabilizar el círculo de habilidades */
+            /* Variables para el cálculo exacto del centrado del anillo */
             --ring-radius: calc(var(--ring-size) / 2);
             --half-icon: calc(var(--icon-size) / 2);
             --position-offset: calc(var(--ring-radius) - var(--half-icon));
@@ -120,31 +120,9 @@
             display: flex; 
             align-items: center;
         }
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 10px 15px;
-            margin-left: 5px;
-            font-weight: 400;
-            transition: color 0.3s, border-bottom 0.3s;
-            border-bottom: 2px solid transparent; 
-        }
         .nav-links a.active-scroll {
             color: var(--highlight-color);
             border-bottom: 2px solid var(--highlight-color);
-        }
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            color: var(--primary-color); 
-            cursor: pointer;
-            margin-left: 20px;
-            padding: 5px;
-            transition: color 0.3s, transform 0.3s;
         }
         
         /* Controles Móviles */
@@ -152,35 +130,8 @@
             display: none; 
             align-items: center;
         }
-        .hamburger {
-            cursor: pointer;
-            font-size: 2em;
-            color: var(--text-color);
-            margin-left: 15px;
-        }
-        .mobile-menu {
-            display: none; 
-            flex-direction: column;
-            background-color: var(--secondary-color);
-            position: absolute;
-            top: var(--header-height); 
-            left: 0;
-            width: 100%;
-            box-shadow: 0 4px 5px var(--shadow-color);
-            z-index: 999;
-        }
-        .mobile-menu.active {
-            display: flex; 
-        }
-        .mobile-menu a {
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--section-bg);
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        /* --- SECCIÓN HERO (El Círculo y la Foto) --- */
+        
+        /* --- SECCIÓN HERO (El Círculo y la Foto ORGANIZADOS) --- */
         
         .profile-area { 
             position: relative; 
@@ -191,8 +142,8 @@
         }
 
         .profile-pic { 
-            /* Imagen de placeholder con el estilo que te gusta (traje oscuro) */
-            background-image: url('https://i.postimg.cc/Qd1n4pY7/business-man-dark-suit-placeholder.jpg'); 
+            /* RUTA DE LA IMAGEN EN TRAJE DE NEGOCIOS (La original) */
+            background-image: url('https://i.postimg.cc/k47tX4b2/businessman-portrait-suit-dark-bg.jpg'); 
             background-size: cover; 
             background-position: center; 
             width: 180px; 
@@ -203,7 +154,7 @@
             position: absolute; 
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%); /* Centrado perfecto */
             z-index: 10; 
         }
 
@@ -233,6 +184,8 @@
         }
         
         /* POSICIONAMIENTO PRECISO DEL ANILLO (ORGANIZADO) */
+        /* La clave es usar las coordenadas polares para asegurar que están en el anillo */
+        
         /* 1. Arriba (0 grados) */
         .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); } 
         /* 2. Arriba-Derecha (45 grados) */
@@ -255,26 +208,21 @@
 
         .intro h1 { font-size: 3em; margin-bottom: 5px; }
         .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
-        .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
-        @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
-        
-        .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
+        .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; }
 
-        /* --- ESTILOS DE PROYECTOS (Añadido: Tipo Ventana de PC) --- */
+        /* --- ESTILOS DE PROYECTOS (Ventana de PC) --- */
         #proyectos { background-color: var(--bg-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
         .project-card { 
             background-color: var(--card-bg); 
-            border-radius: 12px; /* Más redondeado */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra de ventana de PC */
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
             overflow: hidden; 
             text-align: center; 
-            transition: box-shadow 0.3s; 
-            position: relative; /* Necesario para los controles */
-            padding-top: 30px; /* Deja espacio para la barra de control */
+            position: relative; 
+            padding-top: 30px; 
         }
-        /* Barra de control superior (Simula la barra de la ventana) */
         .project-card::before {
             content: '';
             position: absolute;
@@ -282,13 +230,12 @@
             left: 0;
             right: 0;
             height: 30px;
-            background-color: rgba(34, 40, 49, 0.7); /* Color de barra */
+            background-color: rgba(34, 40, 49, 0.7); 
             border-top-left-radius: 12px;
             border-top-right-radius: 12px;
             z-index: 5;
         }
 
-        /* Controles (Puntos de colores) */
         .project-card-controls {
             position: absolute;
             top: 10px;
@@ -306,7 +253,6 @@
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
 
-        /* Icono de corona (Top right) */
         .crown-icon {
             position: absolute;
             top: 5px;
@@ -321,25 +267,6 @@
             height: 200px; 
             object-fit: cover; 
             border-bottom: 3px solid var(--primary-color); 
-            transition: transform 0.5s; 
-        }
-        .project-card:hover img { transform: scale(1.05); }
-        .project-info { padding: 15px; }
-        .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
-        .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
-        
-        /* --- Otras Secciones y Footer (Resto del código estable) --- */
-        #servicios { background-color: var(--section-bg); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
-        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
-        .whatsapp-button { display: block; background-color: var(--whatsapp-color); }
-        #contacto { text-align: center; background-color: var(--secondary-color); }
-        footer { 
-            text-align: center;
-            padding: 20px 0;
-            background-color: var(--secondary-color);
-            border-top: 1px solid var(--section-bg);
         }
 
         /* --- MEDIA QUERY PARA MÓVILES --- */
@@ -351,8 +278,6 @@
             :root {
                 --ring-size: 280px; 
                 --icon-size: 40px;  
-                --ring-radius: calc(var(--ring-size) / 2);
-                --half-icon: calc(var(--icon-size) / 2);
                 --position-offset: calc(var(--ring-radius) - var(--half-icon));
             }
             .profile-pic {
@@ -400,14 +325,14 @@
                 <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
                 
                 <div class="tech-ring">
-                    <div class="tech-icon" title="JavaScript (Frontend)"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
-                    <div class="tech-icon" title="Node.js / Express"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
+                    <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
                     <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
                     <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt" style="color:#264de4;"></i></div>
+                    <div class="tech-icon" title="JavaScript (Frontend)"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
                     <div class="tech-icon" title="Vercel Hosting"><i class="fas fa-cloud"></i></div> 
-                    <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
-                    <div class="tech-icon" title="Linux / Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
+                    <div class="tech-icon" title="JavaScript (Backend)"><i class="fab fa-js-square" style="color:#68A063;"></i></div>
                     <div class="tech-icon" title="Excel / Google Sheets"><i class="fas fa-table" style="color:#107C41;"></i></div>
+                    <div class="tech-icon" title="Linux / Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
                 </div>
                 
             </div>
@@ -547,7 +472,7 @@
 
     <script>
         // =========================================================
-        // === 1. CONFIGURACIÓN DE DATOS ===
+        // === 1. CONFIGURACIÓN DE DATOS Y DOM ===
         // =========================================================
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
         const PROJECTS_CONTAINER = document.getElementById('projects-container');
@@ -594,7 +519,7 @@
         }
         
         // =========================================================
-        // === 3. LÓGICA DE PARSEO DE CSV & RENDERIZADO ===
+        // === 3. LÓGICA DE PARSEO DE CSV & RENDERIZADO (Con Ventana de PC) ===
         // =========================================================
         function parseCSV(text) {
             const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
@@ -706,13 +631,12 @@
         }
 
         // =========================================================
-        // === 4. SCROLL SPY (Resaltado de Menú) ===
+        // === 4. SCROLL SPY, ANIMACIONES & INICIALIZACIÓN ===
         // =========================================================
         let isScrollingFromClick = false; 
 
         function scrollSpy() {
             if (isScrollingFromClick) return;
-
             const offset = 60; 
             let currentSectionId = 'hero'; 
             
@@ -732,14 +656,10 @@
             });
         }
         
-        // =========================================================
-        // === 5. ANIMACIÓN DE APARICIÓN AL SCROLL ===
-        // =========================================================
         let observer;
 
         function initScrollAnimations() {
             if (observer) observer.disconnect(); 
-
             const animatedElements = document.querySelectorAll('.scroll-animate');
             
             animatedElements.forEach(el => {
@@ -748,11 +668,7 @@
                 }
             });
 
-            const options = {
-                root: null, 
-                rootMargin: '0px',
-                threshold: 0.1 
-            };
+            const options = { root: null, rootMargin: '0px', threshold: 0.1 };
 
             observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -763,25 +679,10 @@
                 });
             }, options);
 
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
+            animatedElements.forEach(el => { observer.observe(el); });
         }
         
-        // =========================================================
-        // === 6. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
-        // =========================================================
-
-        // Activar/desactivar el menú móvil
-        hamburger.addEventListener('click', () => {
-            mobileLinks.classList.toggle('active');
-        });
-
-        // Eventos de botones de modo día/noche
-        if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
-        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-        
-        // Manejar el clic en enlaces de menú (PC y Móvil)
+        // Manejar el clic en enlaces de menú
         document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 isScrollingFromClick = true; 
@@ -802,6 +703,9 @@
         });
         
         window.addEventListener('scroll', scrollSpy);
+        hamburger.addEventListener('click', () => { mobileLinks.classList.toggle('active'); });
+        if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
 
         document.addEventListener("DOMContentLoaded", function() {
             loadTheme();
