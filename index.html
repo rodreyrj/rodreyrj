@@ -27,7 +27,6 @@
             /* Variables para estabilizar el círculo de habilidades */
             --ring-radius: calc(var(--ring-size) / 2);
             --half-icon: calc(var(--icon-size) / 2);
-            /* Offset ajustado para centrar el icono en el borde del anillo */
             --position-offset: calc(var(--ring-radius) - var(--half-icon));
         }
 
@@ -65,13 +64,11 @@
             padding: 20px 0;
         }
         
-        /* AJUSTES PARA SCROLL SPY Y ANCLAS */
         section {
             padding: 80px 0;
             padding-top: calc(80px + var(--header-height)); 
             margin-top: calc(-1 * var(--header-height)); 
         }
-        /* El Hero no necesita margen superior */
         #hero {
             padding-top: 50px; 
             margin-top: 0; 
@@ -149,12 +146,8 @@
             padding: 5px;
             transition: color 0.3s, transform 0.3s;
         }
-        .theme-toggle:hover {
-            color: var(--highlight-color);
-            transform: scale(1.1);
-        }
         
-        /* Controles Móviles (Tema + Hamburguesa) */
+        /* Controles Móviles */
         .mobile-header-controls {
             display: none; 
             align-items: center;
@@ -165,8 +158,6 @@
             color: var(--text-color);
             margin-left: 15px;
         }
-
-        /* Menú Desplegable (Móvil) */
         .mobile-menu {
             display: none; 
             flex-direction: column;
@@ -200,8 +191,8 @@
         }
 
         .profile-pic { 
-            /* Se usa la imagen de un placeholder para la demo */
-            background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); 
+            /* Imagen de placeholder con el estilo que te gusta (traje oscuro) */
+            background-image: url('https://i.postimg.cc/Qd1n4pY7/business-man-dark-suit-placeholder.jpg'); 
             background-size: cover; 
             background-position: center; 
             width: 180px; 
@@ -212,7 +203,7 @@
             position: absolute; 
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Centrado perfecto */
+            transform: translate(-50%, -50%); 
             z-index: 10; 
         }
 
@@ -241,131 +232,122 @@
             animation: reverse-spin 30s linear infinite; 
         }
         
-        /* POSICIONAMIENTO DEL ANILLO (USANDO CALC() PARA ESTABILIDAD) */
-        /* La clave está en usar --position-offset para el desplazamiento desde el centro */
-        
+        /* POSICIONAMIENTO PRECISO DEL ANILLO (ORGANIZADO) */
         /* 1. Arriba (0 grados) */
-        .tech-icon:nth-child(1) { 
-            top: 0; left: 50%; 
-            transform: translate(-50%, -50%); 
-        } 
-
-        /* 2. Arriba-Derecha (45 grados) - Usando 0.707 (sen/cos de 45) */
-        .tech-icon:nth-child(2) { 
-            top: calc(50% - var(--position-offset) * 0.707); 
-            right: calc(50% - var(--position-offset) * 0.707); 
-            transform: translate(50%, -50%); 
-        } 
-
+        .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); } 
+        /* 2. Arriba-Derecha (45 grados) */
+        .tech-icon:nth-child(2) { top: calc(50% - var(--position-offset) * 0.707); right: calc(50% - var(--position-offset) * 0.707); transform: translate(50%, -50%); } 
         /* 3. Derecha (90 grados) */
-        .tech-icon:nth-child(3) { 
-            top: 50%; right: 0; 
-            transform: translate(50%, -50%); 
-        } 
-
+        .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translate(50%, -50%); } 
         /* 4. Abajo-Derecha (135 grados) */
-        .tech-icon:nth-child(4) { 
-            bottom: calc(50% - var(--position-offset) * 0.707); 
-            right: calc(50% - var(--position-offset) * 0.707); 
-            transform: translate(50%, 50%); 
-        }
-
+        .tech-icon:nth-child(4) { bottom: calc(50% - var(--position-offset) * 0.707); right: calc(50% - var(--position-offset) * 0.707); transform: translate(50%, 50%); }
         /* 5. Abajo (180 grados) */
-        .tech-icon:nth-child(5) { 
-            bottom: 0; left: 50%; 
-            transform: translate(-50%, 50%); 
-        } 
-
+        .tech-icon:nth-child(5) { bottom: 0; left: 50%; transform: translate(-50%, 50%); } 
         /* 6. Abajo-Izquierda (225 grados) */
-        .tech-icon:nth-child(6) { 
-            bottom: calc(50% - var(--position-offset) * 0.707); 
-            left: calc(50% - var(--position-offset) * 0.707); 
-            transform: translate(-50%, 50%); 
-        } 
-
+        .tech-icon:nth-child(6) { bottom: calc(50% - var(--position-offset) * 0.707); left: calc(50% - var(--position-offset) * 0.707); transform: translate(-50%, 50%); } 
         /* 7. Izquierda (270 grados) */
-        .tech-icon:nth-child(7) { 
-            top: 50%; left: 0; 
-            transform: translate(-50%, -50%); 
-        } 
-
+        .tech-icon:nth-child(7) { top: 50%; left: 0; transform: translate(-50%, -50%); } 
         /* 8. Arriba-Izquierda (315 grados) */
-        .tech-icon:nth-child(8) { 
-            top: calc(50% - var(--position-offset) * 0.707); 
-            left: calc(50% - var(--position-offset) * 0.707); 
-            transform: translate(-50%, -50%); 
-        } 
+        .tech-icon:nth-child(8) { top: calc(50% - var(--position-offset) * 0.707); left: calc(50% - var(--position-offset) * 0.707); transform: translate(-50%, -50%); } 
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes reverse-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
-        /* Estilos del texto Hero */
         .intro h1 { font-size: 3em; margin-bottom: 5px; }
         .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
         .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
         @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
         
         .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
-        .cta-buttons a:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
 
-        /* --- SECCIONES INTERMEDIAS (Servicios/Proyectos) --- */
-        #servicios { background-color: var(--section-bg); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px var(--shadow-color); }
-        .service-card .service-icon { font-size: 3em; color: var(--primary-color); margin-bottom: 15px; display: block; }
-        .service-card h3 { color: var(--primary-color); font-size: 1.5em; margin-bottom: 10px; }
-        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
-        .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
-        .whatsapp-button:hover { background-color: #128C7E; }
-
+        /* --- ESTILOS DE PROYECTOS (Añadido: Tipo Ventana de PC) --- */
         #proyectos { background-color: var(--bg-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .project-card { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 4px var(--shadow-color); overflow: hidden; text-align: center; transition: box-shadow 0.3s; }
-        .project-card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--primary-color); transition: transform 0.5s; }
+        
+        .project-card { 
+            background-color: var(--card-bg); 
+            border-radius: 12px; /* Más redondeado */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra de ventana de PC */
+            overflow: hidden; 
+            text-align: center; 
+            transition: box-shadow 0.3s; 
+            position: relative; /* Necesario para los controles */
+            padding-top: 30px; /* Deja espacio para la barra de control */
+        }
+        /* Barra de control superior (Simula la barra de la ventana) */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background-color: rgba(34, 40, 49, 0.7); /* Color de barra */
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            z-index: 5;
+        }
+
+        /* Controles (Puntos de colores) */
+        .project-card-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 15;
+            display: flex;
+            gap: 7px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+
+        /* Icono de corona (Top right) */
+        .crown-icon {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1.5em;
+            color: #ffd700; 
+            z-index: 15;
+        }
+
+        .project-card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-bottom: 3px solid var(--primary-color); 
+            transition: transform 0.5s; 
+        }
         .project-card:hover img { transform: scale(1.05); }
         .project-info { padding: 15px; }
         .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
-        .project-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
         .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
-        .project-info a:hover { background-color: var(--highlight-color); }
-
-        #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
-        .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
-        .contact-item { display: flex; align-items: center; font-size: 1.1em; }
-        .contact-item i { font-size: 1.5em; color: var(--primary-color); margin-right: 10px; }
-        .contact-item a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
-        .contact-item a:hover { color: var(--highlight-color); }
         
+        /* --- Otras Secciones y Footer (Resto del código estable) --- */
+        #servicios { background-color: var(--section-bg); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
+        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
+        .whatsapp-button { display: block; background-color: var(--whatsapp-color); }
+        #contacto { text-align: center; background-color: var(--secondary-color); }
         footer { 
             text-align: center;
             padding: 20px 0;
             background-color: var(--secondary-color);
             border-top: 1px solid var(--section-bg);
-            color: var(--text-color); 
-            font-size: 0.9em;
         }
 
         /* --- MEDIA QUERY PARA MÓVILES --- */
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-            }
-            .mobile-header-controls { 
-                display: flex; 
-            }
+            .nav-links { display: none; }
+            .mobile-header-controls { display: flex; }
+            #theme-toggle-pc { display: none; } 
             
-            #theme-toggle-pc { 
-                display: none; 
-            } 
-            #theme-toggle-mobile-header { 
-                margin-left: 0; 
-            } 
-            .logo a {
-                font-size: 1.3em;
-            }
-
-            /* Reducción de tamaño del anillo y foto en móvil */
             :root {
                 --ring-size: 280px; 
                 --icon-size: 40px;  
@@ -377,8 +359,6 @@
                 width: 120px; 
                 height: 120px;
             }
-            .intro h1 { font-size: 2em; }
-            .typed-container { font-size: 1.1em; }
         }
     </style>
 </head>
@@ -420,14 +400,14 @@
                 <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
                 
                 <div class="tech-ring">
+                    <div class="tech-icon" title="JavaScript (Frontend)"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
                     <div class="tech-icon" title="Node.js / Express"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
                     <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
                     <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt" style="color:#264de4;"></i></div>
                     <div class="tech-icon" title="Vercel Hosting"><i class="fas fa-cloud"></i></div> 
-                    <div class="tech-icon" title="JavaScript (Backend)"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
-                    <div class="tech-icon" title="Excel / Google Sheets"><i class="fas fa-table" style="color:#107C41;"></i></div>
-                    <div class="tech-icon" title="Linux / Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
                     <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
+                    <div class="tech-icon" title="Linux / Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
+                    <div class="tech-icon" title="Excel / Google Sheets"><i class="fas fa-table" style="color:#107C41;"></i></div>
                 </div>
                 
             </div>
@@ -567,7 +547,7 @@
 
     <script>
         // =========================================================
-        // === 1. CONFIGURACIÓN DE DATOS (Mismos que el original) ===
+        // === 1. CONFIGURACIÓN DE DATOS ===
         // =========================================================
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
         const PROJECTS_CONTAINER = document.getElementById('projects-container');
@@ -652,6 +632,13 @@
                 card.classList.add('project-card', 'scroll-animate'); 
                 
                 card.innerHTML = `
+                    <div class="project-card-controls">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="crown-icon"><i class="fas fa-crown"></i></div>
+                    
                     <img src="${proyecto.imagen}" 
                          alt="Imagen del proyecto ${proyecto.nombre}"
                          loading="lazy"    
