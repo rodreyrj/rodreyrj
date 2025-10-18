@@ -53,8 +53,8 @@
             line-height: 1.6;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden; /* EVITA EL SCROLL HORIZONTAL */
-            width: 100%; /* Asegura que el body no sea más ancho que la pantalla */
+            overflow-x: hidden; 
+            width: 100%; 
         }
         .container {
             width: 90%;
@@ -193,6 +193,10 @@
                 --ring-size: 300px; 
                 --icon-size: 50px;  
             }
+            .profile-pic {
+                width: 160px;
+                height: 160px;
+            }
         }
         
         /* Móvil (Pantallas hasta 768px) */
@@ -214,38 +218,37 @@
                 font-size: 1.3em;
             }
             
-            /* AJUSTES CRUCIALES DEL ANILLO Y FUENTES */
+            /* AJUSTES CRUCIALES DEL ANILLO Y FOTO PARA SEPARACIÓN */
             :root {
-                --ring-size: 200px; /* Tamaño del anillo más pequeño AÚN */
+                --ring-size: 270px; /* Tamaño del anillo más grande en móvil para separarlo */
                 --icon-size: 40px;  /* Reducir el tamaño de los iconos */
             }
             
             .tech-icon {
-                font-size: 1.2em; /* Reducir el tamaño de los iconos FAB dentro del círculo */
+                font-size: 1.2em;
             }
             
             .profile-pic {
-                width: 140px;
-                height: 140px;
+                width: 130px; /* Foto central más pequeña para mayor separación */
+                height: 130px;
+                border-width: 3px; 
             }
+
             .intro h1 {
-                font-size: 2em; /* Título principal más pequeño */
+                font-size: 2em; 
             }
             .typed-container {
-                font-size: 1.1em; /* Texto mecanografiado más pequeño */
+                font-size: 1.1em; 
             }
             .section-title {
                 font-size: 2em;
             }
             .cta-buttons a {
-                padding: 10px 20px; /* Reducir padding de botones */
+                padding: 10px 20px; 
                 font-size: 0.9em;
             }
-            .services-grid {
-                grid-template-columns: 1fr; /* Una columna en móvil */
-            }
-            .projects-grid {
-                grid-template-columns: 1fr; /* Una columna en móvil */
+            .services-grid, .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -260,17 +263,17 @@
             position: relative; 
             display: inline-block; 
             margin-bottom: 50px; 
-            /* Esto es clave para que el anillo se escale correctamente en móviles */
             width: var(--ring-size); 
             height: var(--ring-size); 
             max-width: 90vw; 
         }
         .profile-pic { 
+            /* ASEGÚRATE QUE ESTA URL ES LA DE TU FOTO CON EL TRAJE */
             background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); 
             background-size: cover; 
             background-position: center; 
-            width: 180px; 
-            height: 180px; 
+            width: 180px; /* Tamaño por defecto PC */
+            height: 180px; /* Tamaño por defecto PC */
             border-radius: 50%; 
             border: 5px solid var(--primary-color); 
             box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); 
@@ -281,15 +284,6 @@
             z-index: 10; 
         }
         
-        /* Ajuste para que la foto de perfil se reduzca en móvil y se mantenga dentro del anillo */
-        @media (max-width: 768px) {
-            .profile-pic {
-                width: 100px;
-                height: 100px;
-                border-width: 3px; 
-            }
-        }
-
         .tech-ring { 
             position: absolute; 
             top: 0; 
@@ -298,6 +292,7 @@
             height: 100%; 
             animation: spin 30s linear infinite; 
         }
+        
         .tech-icon { 
             position: absolute; 
             width: var(--icon-size); 
@@ -313,20 +308,22 @@
             box-shadow: 0 0 10px var(--shadow-color); 
             animation: reverse-spin 30s linear infinite; 
         }
-        
-        /* AJUSTES CRUCIALES DE POSICIÓN DE ÍCONOS PARA MAYOR SEPARACIÓN */
-        /* Estos porcentajes mueven los iconos más hacia el borde del contenedor (.tech-ring) */
-        .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } /* Arriba */
-        .tech-icon:nth-child(2) { top: 10%; right: 8%; } /* Arriba-Derecha */
-        .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } /* Derecha */
-        .tech-icon:nth-child(4) { bottom: 10%; right: 8%; } /* Abajo-Derecha */
-        .tech-icon:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); } /* Abajo */
-        .tech-icon:nth-child(6) { bottom: 10%; left: 8%; } /* Abajo-Izquierda */
-        .tech-icon:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); } /* Izquierda */
-        .tech-icon:nth-child(8) { top: 10%; left: 8%; } /* Arriba-Izquierda */
+
+        /* POSICIONAMIENTO MANUAL Y ESTABLE DE ÍCONOS */
+        /* Estos valores garantizan que los íconos estén en el borde de un círculo, */
+        /* con un buen espacio desde el centro en todas las resoluciones. */
+        .tech-icon:nth-child(1) { top: calc(0% - var(--icon-size) / 2); left: 50%; transform: translateX(-50%); } /* Arriba */
+        .tech-icon:nth-child(2) { top: 12%; right: 12%; } /* Arriba-Derecha */
+        .tech-icon:nth-child(3) { top: 50%; right: calc(0% - var(--icon-size) / 2); transform: translateY(-50%); } /* Derecha */
+        .tech-icon:nth-child(4) { bottom: 12%; right: 12%; } /* Abajo-Derecha */
+        .tech-icon:nth-child(5) { bottom: calc(0% - var(--icon-size) / 2); left: 50%; transform: translateX(-50%); } /* Abajo */
+        .tech-icon:nth-child(6) { bottom: 12%; left: 12%; } /* Abajo-Izquierda */
+        .tech-icon:nth-child(7) { top: 50%; left: calc(0% - var(--icon-size) / 2); transform: translateY(-50%); } /* Izquierda */
+        .tech-icon:nth-child(8) { top: 12%; left: 12%; } /* Arriba-Izquierda */
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes reverse-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
 
         .intro h1 { font-size: 3em; margin-bottom: 5px; }
         .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
@@ -464,7 +461,7 @@
     <section id="hero">
         <div class="container"> 
             <div class="profile-area">
-                <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
+                <div class="profile-pic" style="background-image: url('https://i.postimg.cc/rs192R4P/yoo.png');" alt="Foto de perfil de Rod Rey RJ"></div>
                 
                 <div class="tech-ring">
                     <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
