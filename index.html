@@ -16,7 +16,7 @@
             --primary-color: #00ADB5; 
             --secondary-color: #393E46; 
             --highlight-color: #FF5722; 
-            --ring-size: 350px; 
+            --ring-size: 350px; /* Tamaño por defecto para PC */
             --icon-size: 55px; 
             --card-bg: #222831; 
             --section-bg: #1A1A1A;
@@ -53,7 +53,7 @@
             line-height: 1.6;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden; 
+            overflow-x: hidden; /* EVITA EL SCROLL HORIZONTAL EN MÓVILES */
         }
         .container {
             width: 90%;
@@ -62,7 +62,6 @@
             padding: 20px 0;
         }
         
-        /* AJUSTES PARA SCROLL SPY Y ANCLAS */
         section {
             padding: 80px 0;
             padding-top: calc(80px + var(--header-height)); 
@@ -92,7 +91,7 @@
             transform: translateY(0);
         }
         
-        /* --- HEADER & NAVEGACIÓN --- */
+        /* --- HEADER & NAVEGACIÓN (Sin cambios) --- */
         header {
             background-color: var(--secondary-color);
             box-shadow: 0 4px 10px var(--shadow-color);
@@ -185,6 +184,7 @@
             text-decoration: none;
         }
         
+        /* --- ESTILOS RESPONSIVOS PARA MÓVILES --- */
         @media (max-width: 768px) {
             .nav-links { 
                 display: none; 
@@ -202,8 +202,28 @@
             .logo a {
                 font-size: 1.3em;
             }
+            
+            /* Ajuste de Anillo y Contenido en Móvil */
+            :root {
+                --ring-size: 250px; /* Reducir el tamaño del anillo */
+                --icon-size: 45px;  /* Reducir el tamaño de los iconos */
+            }
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+            .intro h1 {
+                font-size: 2.5em;
+            }
+            .typed-container {
+                font-size: 1.2em;
+            }
+            .section-title {
+                font-size: 2em;
+            }
         }
-        
+
+
         /* --- SECCIÓN HERO --- */
         #hero {
             text-align: center;
@@ -228,7 +248,7 @@
             box-shadow: 0 0 10px var(--shadow-color); 
             animation: reverse-spin 30s linear infinite; 
         }
-        /* Posicionamiento del anillo */
+        /* Posicionamiento del anillo (Ajustado para funcionar con el nuevo tamaño) */
         .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } 
         .tech-icon:nth-child(2) { top: 13%; right: 13%; } 
         .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } 
@@ -249,7 +269,7 @@
         .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
         .cta-buttons a:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
 
-        /* --- SECCIÓN SERVICIOS --- */
+        /* --- SECCIÓN SERVICIOS (Sin cambios) --- */
         #servicios { background-color: var(--section-bg); }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
@@ -260,7 +280,7 @@
         .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
         .whatsapp-button:hover { background-color: #128C7E; }
 
-        /* --- SECCIÓN PROYECTOS (ESTILOS DE VENTANA) --- */
+        /* --- SECCIÓN PROYECTOS (Estilo de Ventana) --- */
         #proyectos { background-color: var(--bg-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
@@ -277,7 +297,6 @@
             box-shadow: 0 8px 30px var(--shadow-color); 
         }
 
-        /* ESTILO DE LA BARRA DE VENTANA (CLAVE) */
         .window-header {
             display: flex;
             align-items: center;
@@ -325,7 +344,7 @@
         .project-info a:hover { background-color: var(--highlight-color); }
 
 
-        /* --- SECCIÓN CONTACTO y FOOTER --- */
+        /* --- SECCIÓN CONTACTO y FOOTER (Sin cambios) --- */
         #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
         .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
         .contact-item { display: flex; align-items: center; font-size: 1.1em; }
@@ -528,7 +547,7 @@
 
     <script>
         // =========================================================
-        // === 1. CONFIGURACIÓN DE DATOS ===
+        // === 1. CONFIGURACIÓN DE DATOS Y DOM ===
         // =========================================================
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
         const PROJECTS_CONTAINER = document.getElementById('projects-container');
@@ -583,6 +602,7 @@
             const dataRows = lines.slice(1); 
             const projectsData = [];
             dataRows.forEach(line => {
+                // Expresión regular para manejar comas dentro de comillas
                 const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; 
                 if (columns.length >= 3) { 
                     const cleanColumn = col => String(col).trim().replace(/^"|"$/g, '');
@@ -718,7 +738,7 @@
         }
         
         // =========================================================
-        // === 5. ANIMACIÓN DE APARICIÓN AL SCROLL (BONITO) ===
+        // === 5. ANIMACIÓN DE APARICIÓN AL SCROLL ===
         // =========================================================
         let observer;
 
@@ -754,8 +774,45 @@
         }
 
         // =========================================================
-        // === 6. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
+        // === 6. FUNCIÓN PARA BLOQUEAR HERRAMIENTAS DE DESARROLLO ===
         // =========================================================
+
+        function blockDevTools(e) {
+            // F12 key (Windows/Linux)
+            if (e.keyCode == 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (Windows/Linux) or Cmd+Option+I (Mac)
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J (Windows/Linux) or Cmd+Option+J (Mac) for console
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode == 85) {
+                e.preventDefault();
+                return false;
+            }
+        }
+        
+        // =========================================================
+        // === 7. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
+        // =========================================================
+
+        // Bloquear clic derecho (context menu)
+        document.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Bloquear teclas de herramientas de desarrollo
+        document.addEventListener('keydown', blockDevTools);
+
 
         // Activar/desactivar el menú móvil
         hamburger.addEventListener('click', () => {
@@ -798,4 +855,4 @@
         });
     </script>
 </body>
-                        </html>
+</html>
