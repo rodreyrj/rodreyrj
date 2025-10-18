@@ -5,30 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rod Rey RJ | Portafolio Profesional</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inconsolata:wght{400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* VARIABLES DE COLOR - POR DEFECTO: TEMA OSCURO */
+        /* VARIABLES DE COLOR - TEMA OSCURO (Vestido de Negro) */
         :root {
-            --bg-color: #121212;
-            --text-color: #E0E0E0;
-            --primary-color: #00ADB5; 
-            --secondary-color: #393E46; 
-            --highlight-color: #FF5722; 
-            --ring-size: 350px; /* Tamaño por defecto para PC */
+            --bg-color: #121212; /* Fondo principal oscuro */
+            --text-color: #E0E0E0; /* Texto claro */
+            --primary-color: #00ADB5; /* Color principal (azul cian) */
+            --secondary-color: #393E46; /* Fondo de header/tarjeta */
+            --highlight-color: #FF5722; /* Color de acento (naranja/rojo) */
+            --ring-size: 350px; 
             --icon-size: 55px; 
             --card-bg: #222831; 
-            --section-bg: #1A1A1A;
+            --section-bg: #1A1A1A; /* Fondo de sección alterno */
             --whatsapp-color: #25D366;
             --shadow-color: rgba(0, 0, 0, 0.2);
             --header-height: 60px;
-            --logo-font-size: 1.5em; 
-            
-            /* VARIABLES MATEMÁTICAS CLAVE PARA EL CÍRCULO */
+
+            /* Variables para estabilizar el círculo de habilidades */
             --ring-radius: calc(var(--ring-size) / 2);
             --half-icon: calc(var(--icon-size) / 2);
-            /* Distancia que se usa para mover el ícono del centro al borde del anillo */
+            /* Offset ajustado para centrar el icono en el borde del anillo */
             --position-offset: calc(var(--ring-radius) - var(--half-icon));
         }
 
@@ -44,7 +43,7 @@
             --shadow-color: rgba(0, 0, 0, 0.1);
         }
 
-        /* BASE Y RESETEO DE ESTILOS (Sin cambios) */
+        /* BASE Y RESETEO DE ESTILOS */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -58,7 +57,6 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden; 
-            width: 100%; 
         }
         .container {
             width: 90%;
@@ -67,15 +65,18 @@
             padding: 20px 0;
         }
         
+        /* AJUSTES PARA SCROLL SPY Y ANCLAS */
         section {
             padding: 80px 0;
             padding-top: calc(80px + var(--header-height)); 
             margin-top: calc(-1 * var(--header-height)); 
         }
+        /* El Hero no necesita margen superior */
         #hero {
             padding-top: 50px; 
             margin-top: 0; 
             padding-bottom: 50px;
+            text-align: center;
         }
 
         .section-title {
@@ -84,7 +85,7 @@
             color: var(--primary-color);
             margin-bottom: 40px;
         }
-
+        
         /* --- EFECTO DE APARICIÓN AL SCROLL --- */
         .scroll-animate {
             opacity: 0;
@@ -96,7 +97,7 @@
             transform: translateY(0);
         }
         
-        /* --- HEADER & NAVEGACIÓN (Sin cambios) --- */
+        /* --- HEADER & NAVEGACIÓN --- */
         header {
             background-color: var(--secondary-color);
             box-shadow: 0 4px 10px var(--shadow-color);
@@ -112,14 +113,12 @@
             height: 100%;
         }
         .logo a {
-            font-size: var(--logo-font-size); 
+            font-size: 1.5em; 
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
-            margin-left: -5px; 
             padding-left: 5px;
         }
-        
         .nav-links {
             display: flex; 
             align-items: center;
@@ -140,7 +139,6 @@
         .nav-links a:hover {
             color: var(--primary-color);
         }
-
         .theme-toggle {
             background: none;
             border: none;
@@ -156,6 +154,7 @@
             transform: scale(1.1);
         }
         
+        /* Controles Móviles (Tema + Hamburguesa) */
         .mobile-header-controls {
             display: none; 
             align-items: center;
@@ -167,6 +166,7 @@
             margin-left: 15px;
         }
 
+        /* Menú Desplegable (Móvil) */
         .mobile-menu {
             display: none; 
             flex-direction: column;
@@ -188,93 +188,19 @@
             color: var(--text-color);
             text-decoration: none;
         }
-        
-        /* --- MEDIA QUERIES PARA RESPONSIVIDAD (Ajuste de variables) --- */
-        
-        /* Tablet/Mediano (Pantallas de 769px a 1024px) */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            :root {
-                --ring-size: 300px; 
-                --icon-size: 50px;  
-                --ring-radius: calc(var(--ring-size) / 2);
-                --half-icon: calc(var(--icon-size) / 2);
-                --position-offset: calc(var(--ring-radius) - var(--half-icon));
-            }
-            .profile-pic {
-                width: 160px;
-                height: 160px;
-            }
-        }
-        
-        /* Móvil (Pantallas hasta 768px) */
-        @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
-            }
-            .mobile-header-controls { 
-                display: flex; 
-            }
-            
-            #theme-toggle-pc { 
-                display: none; 
-            } 
-            #theme-toggle-mobile-header { 
-                margin-left: 0; 
-            } 
-            .logo a {
-                font-size: 1.3em;
-            }
-            
-            /* AJUSTES DE TAMAÑO PARA MAYOR SEPARACIÓN EN MÓVIL */
-            :root {
-                --ring-size: 280px; 
-                --icon-size: 40px;  
-                --ring-radius: calc(var(--ring-size) / 2);
-                --half-icon: calc(var(--icon-size) / 2);
-                --position-offset: calc(var(--ring-radius) - var(--half-icon));
-            }
-            
-            .profile-pic {
-                width: 120px; /* Foto central más pequeña */
-                height: 120px;
-                border-width: 3px; 
-            }
 
-            .intro h1 {
-                font-size: 2em; 
-            }
-            .typed-container {
-                font-size: 1.1em; 
-            }
-            .section-title {
-                font-size: 2em;
-            }
-            .cta-buttons a {
-                padding: 10px 20px; 
-                font-size: 0.9em;
-            }
-            .services-grid, .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-
-        /* --- SECCIÓN HERO --- */
-        #hero {
-            text-align: center;
-            overflow: hidden; 
-            background-color: var(--bg-color); 
-        }
+        /* --- SECCIÓN HERO (El Círculo y la Foto) --- */
+        
         .profile-area { 
             position: relative; 
             display: inline-block; 
             margin-bottom: 50px; 
-            /* El tamaño del contenedor es el mismo que el anillo */
             width: var(--ring-size); 
             height: var(--ring-size); 
-            max-width: 90vw; 
         }
+
         .profile-pic { 
+            /* Se usa la imagen de un placeholder para la demo */
             background-image: url('https://i.postimg.cc/rs192R4P/yoo.png'); 
             background-size: cover; 
             background-position: center; 
@@ -284,20 +210,18 @@
             border: 5px solid var(--primary-color); 
             box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); 
             position: absolute; 
-            /* Se centra usando 50% y transform */
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Centrado perfecto */
             z-index: 10; 
         }
-        
+
         .tech-ring { 
             position: absolute; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%; 
-            /* La animación de giro va en el contenedor del anillo */
             animation: spin 30s linear infinite; 
         }
         
@@ -314,13 +238,11 @@
             font-size: 1.5em; 
             border: 2px solid var(--primary-color); 
             box-shadow: 0 0 10px var(--shadow-color); 
-            /* El ícono debe girar en sentido contrario */
             animation: reverse-spin 30s linear infinite; 
         }
-
-        /* ****************************************************** */
-        /* *** POSICIONAMIENTO PRECISO Y ESCALABLE CON CALC() *** */
-        /* ****************************************************** */
+        
+        /* POSICIONAMIENTO DEL ANILLO (USANDO CALC() PARA ESTABILIDAD) */
+        /* La clave está en usar --position-offset para el desplazamiento desde el centro */
         
         /* 1. Arriba (0 grados) */
         .tech-icon:nth-child(1) { 
@@ -328,7 +250,7 @@
             transform: translate(-50%, -50%); 
         } 
 
-        /* 2. Arriba-Derecha (45 grados) - Se usa 0.707 (sin(45) o cos(45)) */
+        /* 2. Arriba-Derecha (45 grados) - Usando 0.707 (sen/cos de 45) */
         .tech-icon:nth-child(2) { 
             top: calc(50% - var(--position-offset) * 0.707); 
             right: calc(50% - var(--position-offset) * 0.707); 
@@ -374,13 +296,10 @@
             transform: translate(-50%, -50%); 
         } 
 
-
-        /* ANIMACIONES */
-        /* Nota: La animación spin NO debe tener un translate en el keyframe, ya está centrado en el div.tech-ring */
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes reverse-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
-        /* Estilos de Introducción (Sin cambios) */
+        /* Estilos del texto Hero */
         .intro h1 { font-size: 3em; margin-bottom: 5px; }
         .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
         .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
@@ -389,72 +308,28 @@
         .cta-buttons a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; }
         .cta-buttons a:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
 
-        /* --- SECCIÓN PROYECTOS (Añadiendo el estilo de ventana que faltaba) --- */
+        /* --- SECCIONES INTERMEDIAS (Servicios/Proyectos) --- */
+        #servicios { background-color: var(--section-bg); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px var(--shadow-color); }
+        .service-card .service-icon { font-size: 3em; color: var(--primary-color); margin-bottom: 15px; display: block; }
+        .service-card h3 { color: var(--primary-color); font-size: 1.5em; margin-bottom: 10px; }
+        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
+        .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
+        .whatsapp-button:hover { background-color: #128C7E; }
+
         #proyectos { background-color: var(--bg-color); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .project-card { 
-            background-color: var(--card-bg); 
-            border-radius: 8px; 
-            box-shadow: 0 5px 20px var(--shadow-color); 
-            overflow: hidden; 
-            text-align: center; 
-            transition: box-shadow 0.3s, transform 0.3s; 
-        }
-        .project-card:hover {
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 30px var(--shadow-color); 
-        }
-
-        .window-header {
-            display: flex;
-            align-items: center;
-            padding: 8px 15px;
-            background-color: #28303e; /* Color de cabecera de ventana */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-            position: relative;
-        }
-        .window-dots {
-            display: flex;
-            gap: 6px;
-        }
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.8;
-        }
-        .dot-red { background-color: #ff5f56; }
-        .dot-yellow { background-color: #ffbd2e; }
-        .dot-green { background-color: #27c93f; }
-        
-        .window-header .icon-crown {
-            position: absolute;
-            right: 15px;
-            color: gold;
-            font-size: 1.2em;
-        }
-        
-        /* IMAGEN Y CONTENIDO */
-        .project-card img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            transition: transform 0.5s; 
-            border-bottom: none; /* Eliminado el borde del ícono de proyecto */
-        }
-        .project-card:hover img { 
-            transform: scale(1.05); 
-        }
+        .project-card { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 2px 4px var(--shadow-color); overflow: hidden; text-align: center; transition: box-shadow 0.3s; }
+        .project-card img { width: 100%; height: 200px; object-fit: cover; border-bottom: 3px solid var(--primary-color); transition: transform 0.5s; }
+        .project-card:hover img { transform: scale(1.05); }
         .project-info { padding: 15px; }
         .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
         .project-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
-        .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
+        .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
         .project-info a:hover { background-color: var(--highlight-color); }
 
-
-        /* --- SECCIÓN CONTACTO y FOOTER (Sin cambios) --- */
         #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
         .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
         .contact-item { display: flex; align-items: center; font-size: 1.1em; }
@@ -470,6 +345,41 @@
             color: var(--text-color); 
             font-size: 0.9em;
         }
+
+        /* --- MEDIA QUERY PARA MÓVILES --- */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+            }
+            .mobile-header-controls { 
+                display: flex; 
+            }
+            
+            #theme-toggle-pc { 
+                display: none; 
+            } 
+            #theme-toggle-mobile-header { 
+                margin-left: 0; 
+            } 
+            .logo a {
+                font-size: 1.3em;
+            }
+
+            /* Reducción de tamaño del anillo y foto en móvil */
+            :root {
+                --ring-size: 280px; 
+                --icon-size: 40px;  
+                --ring-radius: calc(var(--ring-size) / 2);
+                --half-icon: calc(var(--icon-size) / 2);
+                --position-offset: calc(var(--ring-radius) - var(--half-icon));
+            }
+            .profile-pic {
+                width: 120px; 
+                height: 120px;
+            }
+            .intro h1 { font-size: 2em; }
+            .typed-container { font-size: 1.1em; }
+        }
     </style>
 </head>
 <body id="body">
@@ -484,7 +394,7 @@
                     <a href="#proyectos" class="nav-link" data-target="proyectos">Proyectos</a>
                     <a href="#contacto" class="nav-link" data-target="contacto">Contacto</a>
                     <button id="theme-toggle-pc" class="theme-toggle" aria-label="Cambiar modo de tema">
-                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-sun"></i> 
                     </button>
                 </div>
                 
@@ -506,23 +416,23 @@
 
     <section id="hero">
         <div class="container"> 
-            <div class="profile-area">
+            <div class="profile-area scroll-animate">
                 <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
                 
                 <div class="tech-ring">
+                    <div class="tech-icon" title="Node.js / Express"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
                     <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
                     <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt" style="color:#264de4;"></i></div>
-                    <div class="tech-icon" title="JavaScript"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
                     <div class="tech-icon" title="Vercel Hosting"><i class="fas fa-cloud"></i></div> 
-                    <div class="tech-icon" title="Node.js"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
-                    <div class="tech-icon" title="Excel / Análisis"><i class="fas fa-table" style="color:#107C41;"></i></div>
-                    <div class="tech-icon" title="Técnico de Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
+                    <div class="tech-icon" title="JavaScript (Backend)"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
+                    <div class="tech-icon" title="Excel / Google Sheets"><i class="fas fa-table" style="color:#107C41;"></i></div>
+                    <div class="tech-icon" title="Linux / Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
                     <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
                 </div>
                 
             </div>
             
-            <div class="intro">
+            <div class="intro scroll-animate">
                 <h1>Hola, Soy <span style="color: var(--primary-color);">Rod Rey RJ</span></h1>
                 
                 <div class="typed-container">
@@ -533,7 +443,7 @@
                     Experto en soluciones tecnológicas integrales, desde la creación de sitios web dinámicos hasta la optimización de sistemas y estrategias de marketing online.
                 </p>
             </div>
-            <div class="cta-buttons">
+            <div class="cta-buttons scroll-animate">
                 <a href="#servicios">Ver Servicios</a>
                 <a href="#proyectos" style="background-color: var(--highlight-color);">Ver Proyectos <i class="fas fa-code"></i></a>
             </div>
@@ -657,7 +567,7 @@
 
     <script>
         // =========================================================
-        // === 1. CONFIGURACIÓN DE DATOS Y DOM ===
+        // === 1. CONFIGURACIÓN DE DATOS (Mismos que el original) ===
         // =========================================================
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
         const PROJECTS_CONTAINER = document.getElementById('projects-container');
@@ -712,7 +622,6 @@
             const dataRows = lines.slice(1); 
             const projectsData = [];
             dataRows.forEach(line => {
-                // Expresión regular para manejar comas dentro de comillas
                 const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; 
                 if (columns.length >= 3) { 
                     const cleanColumn = col => String(col).trim().replace(/^"|"$/g, '');
@@ -733,7 +642,7 @@
             PROJECTS_CONTAINER.innerHTML = ''; 
 
             if (proyectos.length === 0) {
-                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);" class="scroll-animate">Actualmente no hay proyectos disponibles en la tabla. Agrega uno a tu Google Sheet.</p>';
+                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);" class="scroll-animate">Actualmente no hay proyectos disponibles en la tabla.</p>';
                 document.querySelector('#projects-container .scroll-animate').classList.add('appear');
                 return;
             }
@@ -742,16 +651,7 @@
                 const card = document.createElement('div');
                 card.classList.add('project-card', 'scroll-animate'); 
                 
-                // --- ESTRUCTURA TIPO VENTANA ---
                 card.innerHTML = `
-                    <div class="window-header">
-                        <div class="window-dots">
-                            <span class="dot dot-red"></span>
-                            <span class="dot dot-yellow"></span>
-                            <span class="dot dot-green"></span>
-                        </div>
-                        <i class="fas fa-crown icon-crown" title="Proyecto Destacado"></i>
-                    </div>
                     <img src="${proyecto.imagen}" 
                          alt="Imagen del proyecto ${proyecto.nombre}"
                          loading="lazy"    
@@ -762,8 +662,6 @@
                         <a href="${proyecto.host}" target="_blank">Ver Proyecto <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 `;
-                // --- FIN DE ESTRUCTURA TIPO VENTANA ---
-                
                 PROJECTS_CONTAINER.appendChild(card);
             });
             initScrollAnimations(); 
@@ -783,7 +681,7 @@
 
             } catch (error) {
                 console.error("Fallo al cargar los proyectos:", error);
-                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);" class="scroll-animate">❌ Error al cargar proyectos. Revisa si la hoja está publicada como CSV.</p>';
+                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);" class="scroll-animate">❌ Error al cargar proyectos.</p>';
                 document.querySelector('#projects-container .scroll-animate').classList.add('appear');
             }
         }
@@ -882,47 +780,10 @@
                 observer.observe(el);
             });
         }
-
-        // =========================================================
-        // === 6. FUNCIÓN PARA BLOQUEAR HERRAMIENTAS DE DESARROLLO ===
-        // =========================================================
-
-        function blockDevTools(e) {
-            // F12 key (Windows/Linux)
-            if (e.keyCode == 123) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+Shift+I (Windows/Linux) or Cmd+Option+I (Mac)
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+Shift+J (Windows/Linux) or Cmd+Option+J (Mac) for console
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                e.preventDefault();
-                return false;
-            }
-            // Ctrl+U (View Source)
-            if (e.ctrlKey && e.keyCode == 85) {
-                e.preventDefault();
-                return false;
-            }
-        }
         
         // =========================================================
-        // === 7. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
+        // === 6. LÓGICA DE EVENTOS E INICIALIZACIÓN ===
         // =========================================================
-
-        // Bloquear clic derecho (context menu)
-        document.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            return false;
-        });
-
-        // Bloquear teclas de herramientas de desarrollo
-        document.addEventListener('keydown', blockDevTools);
-
 
         // Activar/desactivar el menú móvil
         hamburger.addEventListener('click', () => {
@@ -946,7 +807,6 @@
                     pcLink.classList.add('active-scroll');
                 }
                 
-                // Reactivar el Scroll Spy después del desplazamiento suave
                 setTimeout(() => {
                     isScrollingFromClick = false;
                     scrollSpy(); 
