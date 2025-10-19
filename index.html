@@ -21,6 +21,7 @@
             --card-bg: #222831; 
             --section-bg: #1A1A1A;
             --whatsapp-color: #25D366;
+            --star-color: #FFD700; /* Color de las estrellas */
             --shadow-color: rgba(0, 0, 0, 0.2);
             --header-height: 60px;
             --logo-font-size: 1.5em; 
@@ -46,7 +47,6 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            /* Eliminado scroll-behavior: smooth */
             transition: background-color 0.4s, color 0.4s; 
         }
         
@@ -55,7 +55,7 @@
             line-height: 1.6;
             background-color: var(--bg-color);
             color: var(--text-color);
-            /* *** CAMBIO CLAVE 1: Eliminado el scroll global en el cuerpo *** */
+            /* ELIMINA SCROLL GENERAL */
             overflow: hidden; 
             height: 100vh;
         }
@@ -67,12 +67,10 @@
             padding: 20px 0;
         }
         
-        /* Contenedor principal para la simulación de página */
+        /* Contenedor principal para el scroll interno de la sección activa */
         main {
-            /* Ocupa todo el espacio de la ventana menos el header */
             height: calc(100vh - var(--header-height)); 
             width: 100vw;
-            /* Permite el scroll SOLO dentro de la sección activa si su contenido es largo */
             overflow-y: auto; 
             overflow-x: hidden;
             position: relative;
@@ -102,7 +100,7 @@
             margin-bottom: 40px;
         }
 
-        /* --- HEADER & NAVEGACIÓN (ADAPTADO A SPAN) --- */
+        /* --- HEADER & NAVEGACIÓN --- */
         header {
             background-color: var(--secondary-color);
             box-shadow: 0 4px 10px var(--shadow-color);
@@ -187,13 +185,11 @@
         .mobile-menu.active {
             display: flex; 
         }
-        /* CAMBIO: Usamos div para móvil */
         .mobile-menu div {
             padding: 15px 20px;
             text-align: center;
             border-bottom: 1px solid var(--section-bg);
             color: var(--text-color);
-            text-decoration: none;
             cursor: pointer;
         }
         
@@ -205,7 +201,7 @@
             #theme-toggle-mobile-header { margin-left: 0; } 
         }
 
-        /* --- SECCIÓN HERO (MANTENIDO) --- */
+        /* --- SECCIÓN HERO --- */
         #hero { text-align: center; overflow: hidden; background-color: var(--bg-color); }
         .profile-area { position: relative; display: inline-block; margin-bottom: 50px; }
         .profile-pic { 
@@ -215,7 +211,6 @@
         .tech-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: var(--ring-size); height: var(--ring-size); animation: spin 30s linear infinite; }
         .tech-icon { position: absolute; width: var(--icon-size); height: var(--icon-size); border-radius: 50%; background-color: var(--secondary-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; font-size: 1.5em; border: 2px solid var(--primary-color); box-shadow: 0 0 10px var(--shadow-color); animation: reverse-spin 30s linear infinite; }
         
-        /* Posiciones de Iconos (Tu original) */
         .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } 
         .tech-icon:nth-child(2) { top: 13%; right: 13%; } 
         .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } 
@@ -233,7 +228,6 @@
         .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
         @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
         
-        /* CAMBIO: Ahora son span con cursor: pointer */
         .cta-buttons span { 
             display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; cursor: pointer;
         }
@@ -250,11 +244,11 @@
         .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
         .whatsapp-button:hover { background-color: #128C7E; }
 
-        /* --- ESTILOS DE PROYECTOS (Ventana de PC - MANTENIDO) --- */
-        #proyectos { background-color: var(--bg-color); }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* --- ESTILOS DE PROYECTOS Y CATÁLOGOS (Ventana de PC) --- */
+        #proyectos, #catalogos { background-color: var(--bg-color); }
+        .item-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
-        .project-card { 
+        .item-card { 
             background-color: var(--card-bg); 
             border-radius: 12px; 
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
@@ -264,9 +258,9 @@
             padding-top: 30px; 
             transition: box-shadow 0.3s;
         }
-        .project-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
+        .item-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
 
-        .project-card::before {
+        .item-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -279,7 +273,7 @@
             z-index: 5;
         }
 
-        .project-card-controls {
+        .item-card-controls {
             position: absolute;
             top: 10px;
             left: 10px;
@@ -302,27 +296,50 @@
             top: 5px;
             right: 10px;
             font-size: 1.5em;
-            color: #ffd700; 
+            color: var(--star-color); 
             z-index: 15;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
 
-        .project-card img { 
+        .item-card img { 
             width: 100%; 
             height: 200px; 
             object-fit: cover; 
             border-bottom: 3px solid var(--primary-color); 
             transition: transform 0.5s; 
         }
-        .project-card:hover img { 
+        .item-card:hover img { 
             transform: scale(1.03); 
         }
-        .project-info { padding: 15px; }
-        .project-info h4 { color: var(--primary-color); margin-bottom: 5px; }
-        .project-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
-        .project-info a { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; }
-        .project-info a:hover { background-color: var(--highlight-color); }
-        /* FIN ESTILOS DE PROYECTOS */
+        .item-info { padding: 15px; }
+        .item-info h4 { color: var(--primary-color); margin-bottom: 5px; }
+        .item-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
+        .item-info .project-link { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; margin-top: 10px; }
+        .item-info .project-link:hover { background-color: var(--highlight-color); }
+
+        /* Estilos específicos del catálogo */
+        .rating {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--star-color); /* Color dorado para estrellas */
+        }
+        .rating .fas {
+            margin: 0 1px;
+        }
+        .catalog-whatsapp-button {
+            display: block; 
+            background-color: var(--whatsapp-color); 
+            color: white; 
+            padding: 10px; 
+            text-align: center; 
+            text-decoration: none; 
+            border-radius: 4px; 
+            font-weight: 600; 
+            transition: background-color 0.3s; 
+        }
+        .catalog-whatsapp-button:hover {
+             background-color: #128C7E;
+        }
 
         /* --- SECCIÓN CONTACTO Y FOOTER (MANTENIDO) --- */
         #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
@@ -341,8 +358,6 @@
             font-size: 0.9em;
         }
 
-        /* Eliminación de estilos de animación por scroll ya no necesarios */
-        .scroll-animate { opacity: 1; transform: none; transition: none; }
     </style>
 </head>
 <body id="body">
@@ -354,6 +369,7 @@
                 <div class="nav-links">
                     <span data-target="hero" class="nav-link">Inicio</span>
                     <span data-target="servicios" class="nav-link">Servicios</span>
+                    <span data-target="catalogos" class="nav-link">Catálogos</span>
                     <span data-target="proyectos" class="nav-link">Proyectos</span>
                     <span data-target="contacto" class="nav-link">Contacto</span>
                     <button id="theme-toggle-pc" class="theme-toggle" aria-label="Cambiar modo de tema">
@@ -371,6 +387,7 @@
             <div class="mobile-menu" id="mobile-links">
                 <div data-target="hero">Inicio</div>
                 <div data-target="servicios">Servicios</div>
+                 <div data-target="catalogos">Catálogos</div>
                 <div data-target="proyectos">Proyectos</div>
                 <div data-target="contacto">Contacto</div>
             </div>
@@ -410,7 +427,7 @@
                 
                 <div class="cta-buttons">
                     <span class="page-link" data-target="servicios">Ir a Servicios</span>
-                    <span class="page-link" data-target="proyectos" style="background-color: var(--highlight-color);">Ir a Proyectos <i class="fas fa-code"></i></span>
+                    <span class="page-link" data-target="catalogos" style="background-color: var(--primary-color);">Ver Catálogos <i class="fas fa-film"></i></span>
                 </div>
             </div>
         </section>
@@ -419,7 +436,6 @@
             <div class="container">
                 <h2 class="section-title">Nuestros Servicios</h2>
                 <div class="services-grid">
-                    
                     <div class="service-card">
                         <i class="fas fa-laptop-code service-icon"></i>
                         <h3>Diseño Web</h3>
@@ -429,7 +445,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-
                     <div class="service-card">
                         <i class="fas fa-palette service-icon"></i>
                         <h3>Diseño de Poster</h3>
@@ -439,7 +454,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-
                     <div class="service-card">
                         <i class="fas fa-vector-square service-icon"></i>
                         <h3>Diseño de Logos</h3>
@@ -449,7 +463,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-
                     <div class="service-card">
                         <i class="fas fa-bullhorn service-icon"></i>
                         <h3>Promociones (Mensual)</h3>
@@ -459,7 +472,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-
                     <div class="service-card">
                         <i class="fas fa-terminal service-icon"></i>
                         <h3>Instalación Windows/Linux</h3>
@@ -469,7 +481,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-                    
                     <div class="service-card">
                         <i class="fas fa-mobile-alt service-icon"></i>
                         <h3>Desbloqueo Cuentas Google (Móvil)</h3>
@@ -479,7 +490,6 @@
                             <i class="fab fa-whatsapp"></i> Reservar
                         </a>
                     </div>
-                    
                     <div class="service-card">
                         <i class="fas fa-lock-open service-icon"></i>
                         <h3>Eliminación de Contraseñas (Móvil/PC)</h3>
@@ -493,10 +503,19 @@
             </div>
         </section>
 
+        <section id="catalogos">
+            <div class="container">
+                <h2 class="section-title">Catálogos de Series (Películas, etc.)</h2>
+                <div class="item-grid" id="catalog-container">
+                    <p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Cargando catálogos desde Google Sheets...</p>
+                </div>
+            </div>
+        </section>
+
         <section id="proyectos">
             <div class="container">
                 <h2 class="section-title">Nuestros Proyectos</h2>
-                <div class="projects-grid" id="projects-container">
+                <div class="item-grid" id="projects-container">
                     <p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Cargando proyectos desde Google Sheets...</p>
                 </div>
             </div>
@@ -535,16 +554,16 @@
         // =========================================================
         // === 1. CONFIGURACIÓN DE ESTADO Y ELEMENTOS ===
         // =========================================================
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
+        // URL ORIGINAL DE PROYECTOS
+        const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
+        // URL NUEVA DE CATÁLOGOS
+        const CATALOG_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMqFFyVFUM9e157cdDMwcX7DGmOj8DuL8ZUHMw9QAnNYn-tG1dDZ_u89Za19QPHjIvpBvc-q9E1SQR/pub?output=csv';
+        
         const PROJECTS_CONTAINER = document.getElementById('projects-container');
+        const CATALOG_CONTAINER = document.getElementById('catalog-container'); // Nuevo contenedor
         const ALL_SECTIONS = document.querySelectorAll('section');
-        const NAV_LINKS_PC = document.querySelectorAll('.nav-links span');
-        const NAV_LINKS_MOBILE = document.querySelectorAll('.mobile-menu div');
         const body = document.getElementById('body');
-        const mainContent = document.getElementById('main-content'); // El nuevo contenedor principal
-        const themeTogglePC = document.getElementById('theme-toggle-pc');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
-        const hamburger = document.getElementById('hamburger-menu');
+        const mainContent = document.getElementById('main-content'); 
         const mobileLinks = document.getElementById('mobile-links');
 
 
@@ -554,7 +573,6 @@
 
         /**
          * Muestra la sección deseada y oculta el resto.
-         * Simula el comportamiento de una "página" separada sin scroll en el cuerpo.
          * @param {string} targetId El ID de la sección a mostrar ('hero', 'servicios', etc.)
          */
         function showSection(targetId) {
@@ -563,7 +581,7 @@
                 section.classList.toggle('active', isActive);
             });
 
-            // *** CLAVE: Restablece el scroll del contenedor principal a 0 ***
+            // Restablece el scroll del contenedor principal a 0 (efecto de página nueva)
             if (mainContent) {
                  mainContent.scrollTop = 0;
             }
@@ -592,6 +610,8 @@
         }
 
         function updateThemeIcon(isLight) {
+            const themeTogglePC = document.getElementById('theme-toggle-pc');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
             const iconClass = isLight ? 'fa-moon' : 'fa-sun';
             
             [themeTogglePC, themeToggleMobile].forEach(btn => {
@@ -616,75 +636,148 @@
         function parseCSV(text) {
             const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
             if (lines.length <= 1) return []; 
+            
+            // Suponemos que la primera línea son los encabezados, la ignoramos.
             const dataRows = lines.slice(1); 
-            const projectsData = [];
+            const data = [];
+            
             dataRows.forEach(line => {
+                // Regex para manejar comas dentro de comillas
                 const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; 
                 if (columns.length >= 3) { 
                     const cleanColumn = col => String(col).trim().replace(/^"|"$/g, '');
-                    const project = {
+                    
+                    // Asumiendo el orden: URL, Nombre, Host/Precio
+                    const item = {
                         imagen: cleanColumn(columns[0]), 
                         nombre: cleanColumn(columns[1]), 
-                        host: cleanColumn(columns[2])    
+                        tercer_campo: cleanColumn(columns[2]) // Puede ser Host o Precio
                     };
-                    if (project.imagen && project.nombre && project.host) {
-                        projectsData.push(project);
+                    if (item.imagen && item.nombre && item.tercer_campo) {
+                        data.push(item);
                     }
                 }
             });
-            return projectsData;
+            return data;
         }
 
-        function renderProjects(proyectos) {
-            PROJECTS_CONTAINER.innerHTML = ''; 
+        /**
+         * Genera el HTML de las estrellas basado en el precio.
+         * @param {number} price El precio numérico (ej: 30, 40, 50).
+         * @returns {string} HTML con los iconos de estrellas.
+         */
+        function getStarRating(price) {
+            let numStars = 0;
+            const p = parseFloat(price);
+            
+            if (p >= 50) {
+                numStars = 5;
+            } else if (p >= 40) {
+                numStars = 4;
+            } else if (p >= 30) {
+                numStars = 3;
+            } else {
+                return '<p style="font-size: 0.9em;">Contactar para precio</p>';
+            }
 
-            if (proyectos.length === 0) {
-                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Actualmente no hay proyectos disponibles en la tabla.</p>';
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < numStars) {
+                    starsHtml += '<i class="fas fa-star"></i>'; // Estrella llena
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>'; // Estrella vacía
+                }
+            }
+            return `<div class="rating">${starsHtml}</div>`;
+        }
+
+        /**
+         * Renderiza los elementos (Proyectos o Catálogos) en el contenedor especificado.
+         * @param {Array} items Los datos de los elementos.
+         * @param {HTMLElement} container El contenedor DOM.
+         * @param {string} type 'project' o 'catalog'.
+         */
+        function renderItems(items, container, type) {
+            container.innerHTML = ''; 
+
+            if (items.length === 0) {
+                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Actualmente no hay elementos disponibles en la tabla.</p>';
                 return;
             }
 
-            proyectos.forEach(proyecto => {
+            items.forEach(item => {
                 const card = document.createElement('div');
-                card.classList.add('project-card'); 
+                card.classList.add('item-card'); 
                 
-                // Estilo Ventana Tipo Windows
+                let infoHtml;
+                
+                if (type === 'project') {
+                    // Lógica para Proyectos
+                    infoHtml = `
+                        <h4>${item.nombre}</h4>
+                        <p style="font-size: 0.85em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Host: ${item.tercer_campo}</p>
+                        <a href="${item.tercer_campo}" class="project-link" target="_blank">Ver Proyecto <i class="fas fa-external-link-alt"></i></a>
+                    `;
+                } else {
+                    // Lógica para Catálogos (Precio y Estrellas)
+                    const seriesNameEncoded = encodeURIComponent(`Me interesa la serie: ${item.nombre} (Precio: ${item.tercer_campo} CUP)`);
+                    const whatsappLink = `https://wa.me/5356639178?text=${seriesNameEncoded}`;
+
+                    infoHtml = `
+                        <h4>${item.nombre}</h4>
+                        ${getStarRating(item.tercer_campo)}
+                        <p style="font-size: 1.5em; color: var(--highlight-color); font-weight: 700; margin-bottom: 15px;">${item.tercer_campo} CUP</p>
+                        <a href="${whatsappLink}" class="catalog-whatsapp-button" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Me Interesa
+                        </a>
+                    `;
+                }
+
                 card.innerHTML = `
-                    <div class="project-card-controls">
+                    <div class="item-card-controls">
                         <div class="dot red"></div>
                         <div class="dot yellow"></div>
                         <div class="dot green"></div>
                     </div>
                     <div class="crown-icon"><i class="fas fa-crown"></i></div>
                     
-                    <img src="${proyecto.imagen}" 
-                         alt="Imagen del proyecto ${proyecto.nombre}"
+                    <img src="${item.imagen}" 
+                         alt="Imagen de ${item.nombre}"
                          loading="lazy"    
                          decoding="async"> 
-                    <div class="project-info">
-                        <h4>${proyecto.nombre}</h4>
-                        <p style="font-size: 0.85em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Host: ${proyecto.host}</p>
-                        <a href="${proyecto.host}" target="_blank">Ver Proyecto <i class="fas fa-external-link-alt"></i></a>
+                    <div class="item-info">
+                        ${infoHtml}
                     </div>
                 `;
-                PROJECTS_CONTAINER.appendChild(card);
+                container.appendChild(card);
             });
         }
 
-        async function fetchAndRenderProjects() {
+        async function fetchAndRenderAllItems() {
+            // Cargar Proyectos
             PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--primary-color);">Cargando proyectos desde Google Sheets...</p>';
-            
             try {
-                const response = await fetch(CSV_URL);
-                if (!response.ok) {
-                    throw new Error('Error al cargar la hoja de Google Sheets. Código: ' + response.status);
-                }
+                const response = await fetch(PROJECTS_CSV_URL);
+                if (!response.ok) throw new Error('Error al cargar Proyectos.');
                 const csvText = await response.text();
-                const proyectos = parseCSV(csvText);
-                renderProjects(proyectos);
-
+                const projects = parseCSV(csvText);
+                renderItems(projects, PROJECTS_CONTAINER, 'project');
             } catch (error) {
                 console.error("Fallo al cargar los proyectos:", error);
                 PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);">❌ Error al cargar proyectos.</p>';
+            }
+
+            // Cargar Catálogos
+            CATALOG_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--primary-color);">Cargando catálogos desde Google Sheets...</p>';
+            try {
+                const response = await fetch(CATALOG_CSV_URL);
+                if (!response.ok) throw new Error('Error al cargar Catálogos.');
+                const csvText = await response.text();
+                const catalogs = parseCSV(csvText);
+                renderItems(catalogs, CATALOG_CONTAINER, 'catalog');
+            } catch (error) {
+                console.error("Fallo al cargar los catálogos:", error);
+                CATALOG_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);">❌ Error al cargar catálogos.</p>';
             }
         }
 
@@ -724,33 +817,32 @@
         // === 4. EVENT LISTENERS E INICIALIZACIÓN ===
         // =========================================================
 
-        // Manejar clics en logo, menú de PC, móvil y botones CTA
-        document.querySelectorAll('.page-link, .nav-links span, .mobile-menu div, .logo span').forEach(element => {
-            element.addEventListener('click', function () {
-                // Para enlaces de navegación y botones CTA (usan data-target)
-                let targetId = this.getAttribute('data-target');
-                
-                // Para el logo (usa onclick o lo extraemos de su contexto)
-                if (!targetId && this.tagName === 'SPAN' && this.parentElement.classList.contains('logo')) {
-                    targetId = 'hero';
-                }
-                
-                if (targetId) {
-                    showSection(targetId);
-                }
-            });
-        });
-
-        // Eventos de botones
-        hamburger.addEventListener('click', () => { mobileLinks.classList.toggle('active'); });
-        if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
-        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-        
-        // Eliminado window.addEventListener('scroll', ...)
-
         document.addEventListener("DOMContentLoaded", function() {
+            const themeTogglePC = document.getElementById('theme-toggle-pc');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
+            const hamburger = document.getElementById('hamburger-menu');
+
+            // Manejar clics en logo, menú de PC, móvil y botones CTA
+            document.querySelectorAll('.page-link, .nav-links span, .mobile-menu div, .logo span').forEach(element => {
+                element.addEventListener('click', function () {
+                    let targetId = this.getAttribute('data-target');
+                    if (!targetId && this.tagName === 'SPAN' && this.parentElement.classList.contains('logo')) {
+                        targetId = 'hero';
+                    }
+                    
+                    if (targetId) {
+                        showSection(targetId);
+                    }
+                });
+            });
+
+            // Eventos de botones
+            hamburger.addEventListener('click', () => { mobileLinks.classList.toggle('active'); });
+            if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
+            if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+            
             loadTheme();
-            fetchAndRenderProjects();
+            fetchAndRenderAllItems(); // Cargar ambos: Proyectos y Catálogos
             if(roles.length) setTimeout(type, 1500);
             
             // Iniciar en la página principal y marcar activo
@@ -759,4 +851,4 @@
         });
     </script>
 </body>
-    </html>
+                            </html>
