@@ -229,9 +229,23 @@
         @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
         
         .cta-buttons span { 
-            display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 10px; font-weight: 600; transition: background-color 0.3s, transform 0.3s; cursor: pointer;
+            display: inline-block; 
+            background-color: var(--primary-color); 
+            color: var(--bg-color); 
+            padding: 12px 30px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            margin: 10px; 
+            font-weight: 600; 
+            transition: background-color 0.3s, transform 0.3s; 
+            cursor: pointer;
+        }
+        .cta-buttons span.highlight {
+            background-color: var(--highlight-color);
         }
         .cta-buttons span:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
+        .cta-buttons span.highlight:hover { background-color: var(--primary-color); color: var(--bg-color); transform: translateY(-2px); }
+
 
         /* --- SECCIÓN SERVICIOS (MANTENIDO) --- */
         #servicios { background-color: var(--section-bg); }
@@ -387,7 +401,7 @@
             <div class="mobile-menu" id="mobile-links">
                 <div data-target="hero">Inicio</div>
                 <div data-target="servicios">Servicios</div>
-                 <div data-target="catalogos">Catálogos</div>
+                <div data-target="catalogos">Catálogos</div>
                 <div data-target="proyectos">Proyectos</div>
                 <div data-target="contacto">Contacto</div>
             </div>
@@ -427,7 +441,7 @@
                 
                 <div class="cta-buttons">
                     <span class="page-link" data-target="servicios">Ir a Servicios</span>
-                    <span class="page-link" data-target="catalogos" style="background-color: var(--primary-color);">Ver Catálogos <i class="fas fa-film"></i></span>
+                    <span class="page-link highlight" data-target="proyectos">Ver Proyectos <i class="fas fa-code"></i></span>
                 </div>
             </div>
         </section>
@@ -436,6 +450,7 @@
             <div class="container">
                 <h2 class="section-title">Nuestros Servicios</h2>
                 <div class="services-grid">
+                    
                     <div class="service-card">
                         <i class="fas fa-laptop-code service-icon"></i>
                         <h3>Diseño Web</h3>
@@ -851,4 +866,4 @@
         });
     </script>
 </body>
-                            </html>
+</html>
