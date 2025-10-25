@@ -3,919 +3,878 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rod Rey RJ | Portafolio Profesional</title>
-
-
-<link rel="apple-touch-icon" href="https://i.postimg.cc/65f8RFWL/unnamed-26-removebg-preview.png">
-    <meta name="theme-color" content="#007bff" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
-
-
-    
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inconsolata:wght<-400;700&display=swap" rel="stylesheet">
+    <title>rodreyrj | Diseños Profesionales y Soporte Informático</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <style>
-        /* VARIABLES DE COLOR - POR DEFECTO: TEMA OSCURO */
-        :root {
-            --bg-color: #121212;
-            --text-color: #E0E0E0;
-            --primary-color: #00ADB5; 
-            --secondary-color: #393E46; 
-            --highlight-color: #FF5722; 
-            --ring-size: 350px; 
-            --icon-size: 55px; 
-            --card-bg: #222831; 
-            --section-bg: #1A1A1A;
-            --whatsapp-color: #25D366;
-            --star-color: #FFD700; /* Color de las estrellas */
-            --shadow-color: rgba(0, 0, 0, 0.2);
-            --header-height: 60px;
-            --logo-font-size: 1.5em; 
-            --ring-radius: calc(var(--ring-size) / 2);
-            --half-icon: calc(var(--icon-size) / 2);
-            --position-offset: calc(var(--ring-radius) - var(--half-icon));
-        }
-
-        /* TEMA CLARO */
-        body.light-mode {
-            --bg-color: #F8F8F8;
-            --text-color: #333333;
-            --primary-color: #1A73E8; 
-            --secondary-color: #FFFFFF; 
-            --highlight-color: #FF5722;
-            --card-bg: #FFFFFF;
-            --section-bg: #EEEEEE;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* BASE Y RESETEO DE ESTILOS */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.4s, color 0.4s; 
-        }
-        
+        /* Estilos CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            font-family: 'Poppins', sans-serif; 
-            line-height: 1.6;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            /* ELIMINA SCROLL GENERAL */
-            overflow: hidden; 
-            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d111b; /* Fondo oscuro */
+            color: #e5e7eb; /* Texto claro */
+            scroll-behavior: smooth;
         }
-        
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px 0;
+        .header-shadow-active {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            background-color: #111827;
+            transition: all 0.3s ease-in-out;
         }
-        
-        /* Contenedor principal para el scroll interno de la sección activa */
-        main {
-            height: calc(100vh - var(--header-height)); 
-            width: 100vw;
-            overflow-y: auto; 
-            overflow-x: hidden;
-            position: relative;
+        .header-initial {
+            background-color: transparent;
         }
-
-        /* Ocultar todas las secciones por defecto */
-        section {
-            display: none; 
-            padding: 80px 0;
-            padding-top: 50px; 
-            min-height: 100%;
-        }
-
-        /* Mostrar solo la sección activa (Efecto de página nueva) */
-        section.active {
-            display: block; 
-            width: 100%;
-            height: auto;
-        }
-        
-        #hero { padding-top: 50px; padding-bottom: 50px; text-align: center; }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5em;
-            color: var(--primary-color);
-            margin-bottom: 40px;
-        }
-
-        /* --- HEADER & NAVEGACIÓN --- */
-        header {
-            background-color: var(--secondary-color);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            height: var(--header-height);
-        }
-        nav {
+        .time-box {
+            background-color: #374151;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.75rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-        }
-        /* CAMBIO: Usamos 'span' o 'div' para que no haya navegación nativa */
-        .logo span { 
-            font-size: var(--logo-font-size); 
-            font-weight: 700;
-            color: var(--primary-color);
-            cursor: pointer;
-            margin-left: -5px; 
-            padding-left: 5px;
-        }
-        .nav-links {
-            display: flex; 
-            align-items: center;
-        }
-        /* CAMBIO: Usamos 'span' con atributo data-target */
-        .nav-links span { 
-            cursor: pointer;
-            color: var(--text-color);
-            padding: 10px 15px;
-            margin-left: 5px;
-            font-weight: 400;
-            transition: color 0.3s, border-bottom 0.3s;
-            border-bottom: 2px solid transparent; 
-        }
-        .nav-links span.active-scroll {
-            color: var(--highlight-color);
-            border-bottom: 2px solid var(--highlight-color);
-        }
-        .nav-links span:hover {
-            color: var(--primary-color);
-        }
-
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            color: var(--primary-color); 
-            cursor: pointer;
-            margin-left: 20px;
-            padding: 5px;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .theme-toggle:hover {
-            color: var(--highlight-color);
-            transform: scale(1.1);
-        }
-        
-        .mobile-header-controls {
-            display: none; 
-            align-items: center;
-        }
-        .hamburger {
-            cursor: pointer;
-            font-size: 2em;
-            color: var(--text-color);
-            margin-left: 15px;
-        }
-        .mobile-menu {
-            display: none; 
             flex-direction: column;
-            background-color: var(--secondary-color);
-            position: absolute;
-            top: var(--header-height); 
-            left: 0;
-            width: 100%;
-            box-shadow: 0 4px 5px var(--shadow-color);
-            z-index: 999;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
-        .mobile-menu.active {
-            display: flex; 
+        .time-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
         }
-        .mobile-menu div {
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--section-bg);
-            color: var(--text-color);
+        .time-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-top: 0.25rem;
+        }
+        .logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.2);
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
-        
-        /* Media Query para Móviles */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-header-controls { display: flex; }
-            #theme-toggle-pc { display: none; } 
-            #theme-toggle-mobile-header { margin-left: 0; } 
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        }
+        .page-transition {
+            transition: opacity 0.3s ease-in-out;
+        }
+        /* Estilo específico para las tarjetas de series */
+        .series-card {
+            background-color: #1f2937; /* Fondo más oscuro para destacar */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .series-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3); /* Sombra roja */
         }
 
-        /* --- SECCIÓN HERO --- */
-        #hero { text-align: center; overflow: hidden; background-color: var(--bg-color); }
-        .profile-area { position: relative; display: inline-block; margin-bottom: 50px; }
-        .profile-pic { 
-            background-image: url('https://i.postimg.cc/y8DBwyns/IMG-20251015-182224-845.webp'); 
-            background-size: cover; background-position: center; width: 180px; height: 180px; border-radius: 50%; border: 5px solid var(--primary-color); box-shadow: 0 0 20px rgba(0, 173, 181, 0.5); position: relative; z-index: 10; 
+        /* Estilo para los botones de contacto en Quién Soy */
+        .contact-link {
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        .tech-ring { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: var(--ring-size); height: var(--ring-size); animation: spin 30s linear infinite; }
-        .tech-icon { position: absolute; width: var(--icon-size); height: var(--icon-size); border-radius: 50%; background-color: var(--secondary-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; font-size: 1.5em; border: 2px solid var(--primary-color); box-shadow: 0 0 10px var(--shadow-color); animation: reverse-spin 30s linear infinite; }
-        
-        .tech-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); } 
-        .tech-icon:nth-child(2) { top: 13%; right: 13%; } 
-        .tech-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); } 
-        .tech-icon:nth-child(4) { bottom: 13%; right: 13%; } 
-        .tech-icon:nth-child(5) { bottom: 0; left: 50%; transform: translateX(-50%); } 
-        .tech-icon:nth-child(6) { bottom: 13%; left: 13%; } 
-        .tech-icon:nth-child(7) { top: 50%; left: 0; transform: translateY(-50%); } 
-        .tech-icon:nth-child(8) { top: 13%; left: 13%; } 
-
-        @keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-        @keyframes reverse-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-
-        .intro h1 { font-size: 3em; margin-bottom: 5px; }
-        .typed-container { font-family: 'Inconsolata', monospace; font-size: 1.5em; color: var(--highlight-color); margin-bottom: 30px; font-weight: 700; display: inline-block; white-space: nowrap; overflow: hidden; }
-        .typed-container::after { content: '|'; display: inline-block; color: var(--primary-color); animation: blink-cursor 0.75s step-end infinite; margin-left: 3px; }
-        @keyframes blink-cursor { from, to { color: transparent } 50% { color: var(--primary-color); } }
-        
-        .cta-buttons span { 
-            display: inline-block; 
-            background-color: var(--primary-color); 
-            color: var(--bg-color); 
-            padding: 12px 30px; 
-            text-decoration: none; 
-            border-radius: 5px; 
-            margin: 10px; 
-            font-weight: 600; 
-            transition: background-color 0.3s, transform 0.3s; 
-            cursor: pointer;
-        }
-        .cta-buttons span.highlight {
-            background-color: var(--highlight-color);
-        }
-        .cta-buttons span:hover { background-color: var(--highlight-color); color: white; transform: translateY(-2px); }
-        .cta-buttons span.highlight:hover { background-color: var(--primary-color); color: var(--bg-color); transform: translateY(-2px); }
-
-
-        /* --- SECCIÓNES CON COPYRIGHT --- */
-        .section-copyright-footer {
-            text-align: center;
-            padding: 20px 0 0; 
-            margin-top: 40px; 
-            border-top: 1px solid var(--secondary-color);
-            color: var(--text-color); 
-            font-size: 0.8em;
-            opacity: 0.7;
-        }
-
-        /* --- SECCIÓN SERVICIOS (MANTENIDO) --- */
-        #servicios { background-color: var(--section-bg); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px var(--shadow-color); transition: transform 0.3s; text-align: center; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px var(--shadow-color); }
-        .service-card .service-icon { font-size: 3em; color: var(--primary-color); margin-bottom: 15px; display: block; }
-        .service-card h3 { color: var(--primary-color); font-size: 1.5em; margin-bottom: 10px; }
-        .service-card .price { font-size: 1.8em; color: var(--highlight-color); font-weight: 700; margin: 10px 0 20px; }
-        .whatsapp-button { display: block; background-color: var(--whatsapp-color); color: white; padding: 12px; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; transition: background-color 0.3s; }
-        .whatsapp-button:hover { background-color: #128C7E; }
-
-        /* --- ESTILOS DE PROYECTOS Y CATÁLOGOS (Ventana de PC) --- */
-        #proyectos, #catalogos { background-color: var(--bg-color); }
-        .item-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .item-card { 
-            background-color: var(--card-bg); 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
-            overflow: hidden; 
-            text-align: center; 
-            position: relative; 
-            padding-top: 30px; 
-            transition: box-shadow 0.3s;
-        }
-        .item-card:hover { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
-
-        .item-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 30px;
-            background-color: rgba(34, 40, 49, 0.7); 
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            z-index: 5;
-        }
-
-        .item-card-controls {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 15;
-            display: flex;
-            gap: 7px;
-        }
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: default;
-        }
-        .red { background-color: #ff5f56; }
-        .yellow { background-color: #ffbd2e; }
-        .green { background-color: #27c93f; }
-
-        .crown-icon {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 1.5em;
-            color: var(--star-color); 
-            z-index: 15;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .item-card img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            border-bottom: 3px solid var(--primary-color); 
-            transition: transform 0.5s; 
-        }
-        .item-card:hover img { 
-            transform: scale(1.03); 
-        }
-        .item-info { padding: 15px; }
-        .item-info h4 { color: var(--primary-color); margin-bottom: 5px; }
-        .item-info p { color: var(--text-color); opacity: 0.7; margin-bottom: 15px; }
-        .item-info .project-link { display: inline-block; background-color: var(--primary-color); color: var(--bg-color); padding: 8px 15px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s; margin-top: 10px; }
-        .item-info .project-link:hover { background-color: var(--highlight-color); }
-
-        /* Estilos específicos del catálogo */
-        .rating {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: var(--star-color); /* Color dorado para estrellas */
-        }
-        .rating .fas {
-            margin: 0 1px;
-        }
-        .catalog-whatsapp-button {
-            display: block; 
-            background-color: var(--whatsapp-color); 
-            color: white; 
-            padding: 10px; 
-            text-align: center; 
-            text-decoration: none; 
-            border-radius: 4px; 
-            font-weight: 600; 
-            transition: background-color 0.3s; 
-        }
-        .catalog-whatsapp-button:hover {
-             background-color: #128C7E;
-        }
-
-        /* --- SECCIÓN CONTACTO Y FOOTER (MANTENIDO) --- */
-        #contacto { text-align: center; background-color: var(--secondary-color); color: var(--text-color); }
-        .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
-        .contact-item { display: flex; align-items: center; font-size: 1.1em; }
-        .contact-item i { font-size: 1.5em; color: var(--primary-color); margin-right: 10px; }
-        .contact-item a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
-        .contact-item a:hover { color: var(--highlight-color); }
-
+        .whatsapp-bg { background-color: #25D366; }
+        .whatsapp-bg:hover { background-color: #128C7E; transform: translateY(-2px); }
+        .instagram-bg { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+        .instagram-bg:hover { opacity: 0.9; transform: translateY(-2px); }
+        .email-bg { background-color: #EA4335; }
+        .email-bg:hover { background-color: #D62D20; transform: translateY(-2px); }
     </style>
 </head>
-<body id="body">
-    
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo"><span onclick="showSection('hero')">Rod Rey RJ</span></div> 
-                <div class="nav-links">
-                    <span data-target="hero" class="nav-link">Inicio</span>
-                    <span data-target="servicios" class="nav-link">Servicios</span>
-                    <span data-target="catalogos" class="nav-link">Catálogos</span>
-                    <span data-target="proyectos" class="nav-link">Proyectos</span>
-                    <span data-target="contacto" class="nav-link">Contacto</span>
-                    <button id="theme-toggle-pc" class="theme-toggle" aria-label="Cambiar modo de tema">
-                        <i class="fas fa-sun"></i>
-                    </button>
-                </div>
-                
-                <div class="mobile-header-controls">
-                    <button id="theme-toggle-mobile-header" class="theme-toggle" aria-label="Cambiar modo de tema" style="font-size: 1.5em;">
-                        <i class="fas fa-sun"></i>
-                    </button>
-                    <div class="hamburger" id="hamburger-menu"><i class="fas fa-bars"></i></div>
-                </div>
-            </nav>
-            <div class="mobile-menu" id="mobile-links">
-                <div data-target="hero">Inicio</div>
-                <div data-target="servicios">Servicios</div>
-                <div data-target="catalogos">Catálogos</div>
-                <div data-target="proyectos">Proyectos</div>
-                <div data-target="contacto">Contacto</div>
-            </div>
-        </div>
+<body class="bg-gray-900">
+
+    <!-- Header Contenedor - Se actualiza dinámicamente -->
+    <header id="main-header" class="header-initial fixed top-0 left-0 z-50 w-full transition duration-300 ease-in-out">
+        <!-- Contenido del header se inyecta aquí -->
     </header>
 
-    <main id="main-content">
-        <section id="hero" class="active"> 
-            <div class="container"> 
-                <div class="profile-area">
-                    <div class="profile-pic" alt="Foto de perfil de Rod Rey RJ"></div>
-                    
-                    <div class="tech-ring">
-                        <div class="tech-icon" title="HTML5"><i class="fab fa-html5" style="color:#E44D26;"></i></div>
-                        <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt" style="color:#264de4;"></i></div>
-                        <div class="tech-icon" title="JavaScript"><i class="fab fa-js-square" style="color:#F7DF1E;"></i></div>
-                        <div class="tech-icon" title="Vercel Hosting"><i class="fas fa-cloud" style="color:#black;"></i></div> 
-                        <div class="tech-icon" title="Node.js"><i class="fab fa-node-js" style="color:#68A063;"></i></div>
-                        <div class="tech-icon" title="Excel / Análisis"><i class="fas fa-table" style="color:#107C41;"></i></div>
-                        <div class="tech-icon" title="Técnico de Sistemas"><i class="fab fa-linux" style="color:#FFD43B;"></i></div>
-                        <div class="tech-icon" title="Git / GitHub"><i class="fab fa-git-alt" style="color:#F1502F;"></i></div>
-                    </div>
-                    
-                </div>
-                
-                <div class="intro">
-                    <h1>Hola, Soy <span style="color: var(--primary-color);">Rod Rey RJ</span></h1>
-                    
-                    <div class="typed-container">
-                        <span id="typed-text"></span>
-                    </div>
-                    
-                    <p style="font-size: 1.1em; max-width: 600px; margin: 0 auto 30px;">
-                        Experto en soluciones tecnológicas integrales, desde la creación de sitios web dinámicos hasta la optimización de sistemas y estrategias de marketing online.
+    <!-- Contenido Principal - Donde se cargan las vistas -->
+    <main id="main-content" class="min-h-screen page-transition">
+        <!-- Vistas de la página (Home, Servicios, Proyectos, Quién Soy) se inyectan aquí -->
+    </main>
+    
+    <!-- Footer (El footer siempre es estático y visible) -->
+    <footer id="footer" class="bg-gray-900 text-white border-t border-gray-800 pt-10 pb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            
+            <!-- Columna 1: Logo y Misión -->
+            <div>
+                <a href="javascript:void(0);" onclick="navigateTo('home');" class="inline-flex items-center text-4xl font-extrabold text-blue-500 mb-4">
+                    <img src="https://i.postimg.cc/J06sCDBm/unnamed-7-removebg-preview.png" alt="Logo de rodreyrj - Rayo" class="logo-img mr-3">
+                    rodreyrj
+                </a>
+                <p class="text-gray-400 text-sm mt-2 max-w-xs md:max-w-none mx-auto md:mx-0">
+                    Soporte técnico y diseños web modernos, rápidos y optimizados. Aumenta tu presencia online y mejora tu tecnología.
+                </p>
+            </div>
+
+            <!-- Columna 2: Enlaces (Links) -->
+            <div class="md:pl-16">
+                <h4 class="text-lg font-bold text-white mb-4">Enlaces</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="javascript:void(0);" onclick="navigateTo('home');" class="hover:text-blue-400">Inicio</a></li>
+                    <li><a href="javascript:void(0);" onclick="navigateTo('quien-soy');" class="hover:text-blue-400">Quién Soy</a></li>
+                    <li><a href="javascript:void(0);" onclick="navigateTo('servicios-informaticos');" class="hover:text-blue-400">Servicios Informáticos</a></li>
+                    <li><a href="javascript:void(0);" onclick="navigateTo('plantillas');" class="hover:text-blue-400">Proyectos</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3: Contacto -->
+            <div>
+                <h4 id="contacto-footer" class="text-lg font-bold text-white mb-4">Contacto</h4>
+                <div class="space-y-2 text-gray-400 text-sm">
+                    <p class="flex items-center justify-center md:justify-start">
+                        <span class="mr-2 text-blue-500">📧</span> edgarromerocuc94@gmail.com
+                    </p>
+                    <!-- Número de teléfono en el footer -->
+                    <p class="flex items-center justify-center md:justify-start">
+                        <span class="mr-2 text-blue-500">📱</span> +53 5663 9178
+                    </p>
+                    <p class="flex items-center justify-center md:justify-start">
+                        <span class="mr-2 text-blue-500">📍</span> Ciudad de Cobán, A.V. Guatemala
                     </p>
                 </div>
-                
-                <div class="cta-buttons">
-                    <span class="page-link" data-target="servicios">Ir a Servicios</span>
-                    <span class="page-link highlight" data-target="proyectos">Ver Proyectos <i class="fas fa-code"></i></span>
-                </div>
             </div>
-        </section>
+        </div>
 
-        <section id="servicios">
-            <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <div class="services-grid">
-                    
-                    <div class="service-card">
-                        <i class="fas fa-laptop-code service-icon"></i>
-                        <h3>Diseño Web</h3>
-                        <p>Diseño profesional y responsivo para tu negocio o marca personal.</p>
-                        <div class="price">250 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20Web%20(250%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-palette service-icon"></i>
-                        <h3>Diseño de Poster</h3>
-                        <p>Creación de posters atractivos para eventos o publicidad.</p>
-                        <div class="price">150 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20de%20Poster%20(150%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-vector-square service-icon"></i>
-                        <h3>Diseño de Logos</h3>
-                        <p>Logotipos originales y memorables para tu identidad de marca.</p>
-                        <div class="price">50 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Diseño%20de%20Logos%20(50%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-bullhorn service-icon"></i>
-                        <h3>Promociones (Mensual)</h3>
-                        <p>Gestión y promoción de contenido y redes sociales por un mes.</p>
-                        <div class="price">500 CUP/mes</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20servicio%20de%20Promociones%20Mensuales%20(500%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-terminal service-icon"></i>
-                        <h3>Instalación Windows/Linux</h3>
-                        <p>Instalación limpia y configuración de sistemas operativos.</p>
-                        <div class="price">1000 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20la%20Instalación%20de%20Sistemas%20Operativos%20(1000%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-mobile-alt service-icon"></i>
-                        <h3>Desbloqueo Cuentas Google (Móvil)</h3>
-                        <p>Eliminación de la protección de cuenta de Google (FRP) en móviles.</p>
-                        <div class="price">1000 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20el%20Desbloqueo%20de%20Cuenta%20Google%20en%20Móvil%20(1000%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                    <div class="service-card">
-                        <i class="fas fa-lock-open service-icon"></i>
-                        <h3>Eliminación de Contraseñas (Móvil/PC)</h3>
-                        <p>Eliminación o reseteo de contraseñas de móviles o PC.</p>
-                        <div class="price">500 CUP</div>
-                        <a href="https://wa.me/5356639178?text=Hola,%20me%20interesa%20la%20Eliminación%20de%20Contraseñas%20(500%20CUP)." class="whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Reservar
-                        </a>
-                    </div>
-                </div>
-                <div class="section-copyright-footer">
-                    <p>&copy; 2025 Rod Rey RJ. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </section>
+        <!-- Copyright -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 border-t border-gray-800 pt-4">
+            <p class="text-gray-500 text-xs text-center">
+                © 2025 rodreyrj. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
 
-        <section id="catalogos">
-            <div class="container">
-                <h2 class="section-title">Catálogos de Series (Películas, etc.)</h2>
-                <div class="item-grid" id="catalog-container">
-                    <p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Cargando catálogos desde Google Sheets...</p>
-                </div>
-                <div class="section-copyright-footer">
-                    <p>&copy; 2025 Rod Rey RJ. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </section>
 
-        <section id="proyectos">
-            <div class="container">
-                <h2 class="section-title">Nuestros Proyectos</h2>
-                <div class="item-grid" id="projects-container">
-                    <p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Cargando proyectos desde Google Sheets...</p>
-                </div>
-                <div class="section-copyright-footer">
-                    <p>&copy; 2025 Rod Rey RJ. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="contacto">
-            <div class="container">
-                <h2 class="section-title" style="color: var(--text-color);">Contacto</h2>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+5356639178">56639178</a> (Móvil)
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-whatsapp"></i>
-                        <a href="https://wa.me/5356639178" target="_blank">56639178</a> (WhatsApp)
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:rodreyrj@gmail.com">rodreyrj@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-instagram"></i>
-                        <a href="https://www.instagram.com/rodreyrj?igsh=MWV0OTh0cGE3M2EzbA==" target="_blank">instagram.com/@rodreyrj</a>
-                    </div>
-                </div>
-                <div class="section-copyright-footer">
-                    <p>&copy; 2025 Rod Rey RJ. Todos los derechos reservados.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
+    <!-- Script de Funcionalidad -->
     <script>
-        // =========================================================
-        // === 1. CONFIGURACIÓN DE ESTADO Y ELEMENTOS ===
-        // =========================================================
-        // URL ORIGINAL DE PROYECTOS
-        const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv';
-        // URL NUEVA DE CATÁLOGOS
-        const CATALOG_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMqFFyVFUM9e157cdDMwcX7DGmOj8DuL8ZUHMw9QAnNYn-tG1dDZ_u89Za19QPHjIvpBvc-q9E1SQR/pub?output=csv';
+        // --- CONSTANTES Y CONFIGURACIÓN ---
+        const LOGO_URL = "https://i.postimg.cc/J06sCDBm/unnamed-7-removebg-preview.png";
+        const LOGO_TAG = `<img src="${LOGO_URL}" alt="Logo de rodreyrj - Rayo" class="logo-img mr-3">`;
         
-        const PROJECTS_CONTAINER = document.getElementById('projects-container');
-        const CATALOG_CONTAINER = document.getElementById('catalog-container'); // Nuevo contenedor
-        const ALL_SECTIONS = document.querySelectorAll('section');
-        const body = document.getElementById('body');
-        const mainContent = document.getElementById('main-content'); 
-        const mobileLinks = document.getElementById('mobile-links');
-
-
-        // =========================================================
-        // === 2. LÓGICA DE NAVEGACIÓN (PÁGINAS DISTINTAS) ===
-        // =========================================================
-
-        /**
-         * Muestra la sección deseada y oculta el resto.
-         * @param {string} targetId El ID de la sección a mostrar ('hero', 'servicios', etc.)
-         */
-        function showSection(targetId) {
-            ALL_SECTIONS.forEach(section => {
-                const isActive = section.id === targetId;
-                section.classList.toggle('active', isActive);
-            });
-
-            // Restablece el scroll del contenedor principal a 0 (efecto de página nueva)
-            if (mainContent) {
-                 mainContent.scrollTop = 0;
-            }
-
-            // Actualizar la clase 'active-scroll' en los menús
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active-scroll');
-                if (link.getAttribute('data-target') === targetId) {
-                    link.classList.add('active-scroll');
-                }
-            });
-            
-            // Cierra el menú móvil si está abierto
-            mobileLinks.classList.remove('active'); 
-        }
-
-        // =========================================================
-        // === 3. UTILIDADES Y CARGA DE DATOS ===
-        // =========================================================
-
-        function toggleTheme() {
-            body.classList.toggle('light-mode');
-            const isLightMode = body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
-            updateThemeIcon(isLightMode);
-        }
-
-        function updateThemeIcon(isLight) {
-            const themeTogglePC = document.getElementById('theme-toggle-pc');
-            const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
-            const iconClass = isLight ? 'fa-moon' : 'fa-sun';
-            
-            [themeTogglePC, themeToggleMobile].forEach(btn => {
-                if (btn) {
-                    const icon = btn.querySelector('i');
-                    icon.classList.remove('fa-sun', 'fa-moon');
-                    icon.classList.add(iconClass);
-                }
-            });
-        }
-
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                body.classList.add('light-mode');
-                updateThemeIcon(true);
-            } else {
-                updateThemeIcon(false);
-            }
-        }
+        // URL del CSV con los datos de los proyectos
+        const TEMPLATES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv";
         
-        function parseCSV(text) {
-            const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
-            if (lines.length <= 1) return []; 
+        // URL del CSV para el Catálogo de Series
+        const SERIES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQMqFFyVFUM9e157cdDMwcX7DGmOj8DuL8ZUHMw9QAnNYn-tG1dDZ_u89Za19QPHjIvpBvc-q9E1SQR/pub?output=csv";
+
+        // Número de WhatsApp (se utiliza para el enlace de WhatsApp)
+        const WHATSAPP_NUMBER = "56639178"; 
+        
+        // NÚMERO DE TELÉFONO PARA LLAMADA DIRECTA (ACTUALIZADO A CUBA +53)
+        const PHONE_NUMBER = "+5356639178"; 
+        
+        // Correo del usuario
+        const EMAIL_ADDRESS = "edgarromerocuc94@gmail.com"; 
+        
+        // Instagram del usuario
+        const INSTAGRAM_URL = "https://www.instagram.com/rodreyrj?igsh=MWV0OTh0cGE3M2EzbA==";
+
+        // Límite de series a mostrar en la vista HOME
+        const HOME_SERIES_LIMIT = 4;
+
+
+        const mainContent = document.getElementById('main-content');
+        const headerContainer = document.getElementById('main-header');
+        const mobileMenuId = 'mobile-menu'; 
+        let currentView = 'home';
+        let countdownInterval;
+        
+        // Caché para los datos (Proyectos y Series)
+        let templatesData = null; // Caché para los proyectos (plantillas)
+        let seriesData = null;    // Caché para las series
+
+        // --- LÓGICA DE DATOS CSV ---
+
+        function csvToArray(text) {
+            const rows = text.trim().split('\n');
+            if (rows.length < 2) return [];
             
-            // Suponemos que la primera línea son los encabezados, la ignoramos.
-            const dataRows = lines.slice(1); 
+            // Los encabezados se toman de la primera fila
+            const headers = rows[0].split(',').map(h => h.trim());
+            
             const data = [];
-            
-            dataRows.forEach(line => {
-                // Regex para manejar comas dentro de comillas
-                const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []; 
-                if (columns.length >= 3) { 
-                    const cleanColumn = col => String(col).trim().replace(/^"|"$/g, '');
-                    
-                    // Asumiendo el orden: URL, Nombre, Host/Precio
-                    const item = {
-                        imagen: cleanColumn(columns[0]), 
-                        nombre: cleanColumn(columns[1]), 
-                        tercer_campo: cleanColumn(columns[2]) // Puede ser Host o Precio
-                    };
-                    if (item.imagen && item.nombre && item.tercer_campo) {
-                        data.push(item);
-                    }
-                }
-            });
+            for (let i = 1; i < rows.length; i++) {
+                // Usamos una regex para manejar comas dentro de comillas (si las hubiera, aunque el split simple es suficiente para hojas de cálculo simples)
+                const values = rows[i].split(',').map(v => v.trim());
+                if (values.length !== headers.length) continue; 
+
+                const item = {};
+                headers.forEach((header, index) => {
+                    // Normalizar el nombre de la propiedad
+                    let cleanHeader = header.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    item[cleanHeader] = values[index];
+                });
+
+                data.push(item);
+            }
             return data;
         }
 
-        /**
-         * Genera el HTML de las estrellas basado en el precio.
-         * @param {number} price El precio numérico (ej: 30, 40, 50).
-         * @returns {string} HTML con los iconos de estrellas.
-         */
-        function getStarRating(price) {
-            let numStars = 0;
-            const p = parseFloat(price);
-            
-            if (p >= 50) {
-                numStars = 5;
-            } else if (p >= 40) {
-                numStars = 4;
-            } else if (p >= 30) {
-                numStars = 3;
-            } else {
-                return '<p style="font-size: 0.9em;">El Precio Puede Variar nunca es el Real ctc </p>';
-            }
+        // Función de obtención de datos con caché (Para Proyectos/Plantillas)
+        async function fetchTemplates() {
+            if (templatesData) return templatesData; 
 
-            let starsHtml = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < numStars) {
-                    starsHtml += '<i class="fas fa-star"></i>'; // Estrella llena
-                } else {
-                    starsHtml += '<i class="far fa-star"></i>'; // Estrella vacía
-                }
+            try {
+                const response = await fetch(TEMPLATES_CSV_URL);
+                if (!response.ok) throw new Error(`Error al cargar el CSV de Proyectos: ${response.statusText}`);
+                const csvText = await response.text();
+                // Asumiendo el orden de la hoja de proyectos: URL, Proyecto-Name, Host, Descripcion
+                const data = csvToArray(csvText); 
+                templatesData = data; 
+                return data;
+            } catch (error) {
+                console.error("Error fetching or parsing templates:", error);
+                return []; 
             }
-            return `<div class="rating">${starsHtml}</div>`;
+        }
+        
+        // Función de obtención de datos con caché (Para Series)
+        async function fetchSeries() {
+            if (seriesData) return seriesData; 
+
+            try {
+                const response = await fetch(SERIES_CSV_URL);
+                if (!response.ok) throw new Error(`Error al cargar el CSV de Series: ${response.statusText}`);
+                const csvText = await response.text();
+                // Asumiendo el orden de la hoja de series: url, nombre, precio
+                const data = csvToArray(csvText);
+                seriesData = data;
+                return data;
+            } catch (error) {
+                console.error("Error fetching or parsing series:", error);
+                return []; 
+            }
         }
 
-        /**
-         * Renderiza los elementos (Proyectos o Catálogos) en el contenedor especificado.
-         * @param {Array} items Los datos de los elementos.
-         * @param {HTMLElement} container El contenedor DOM.
-         * @param {string} type 'project' o 'catalog'.
-         */
-        function renderItems(items, container, type) {
-            container.innerHTML = ''; 
 
-            if (items.length === 0) {
-                container.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--text-color);">Actualmente no hay elementos disponibles en la tabla.</p>';
+        // --- VISTAS / TEMPLATES ---
+        
+        // Función de manejo del botón de Llamada
+        function handleCallNow() {
+            // Usa el prefijo tel: para iniciar una llamada con el número actualizado
+            window.location.href = `tel:${PHONE_NUMBER}`;
+        }
+
+        const homeHeaderHTML = (isMobileMenuOpen) => `
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+                <a href="javascript:void(0);" onclick="navigateTo('home');" class="flex items-center text-3xl font-extrabold text-blue-500 hover:text-blue-400 transition duration-300">
+                    ${LOGO_TAG} rodreyrj
+                </a>
+                
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="javascript:void(0);" onclick="navigateTo('quien-soy');" class="text-gray-300 hover:text-blue-400 transition duration-200">Quién Soy</a>
+                    <a href="javascript:void(0);" onclick="navigateTo('servicios-informaticos');" class="text-white bg-blue-600 px-3 py-1 rounded-full hover:bg-blue-700 transition duration-200">Servicios Informáticos</a>
+                    <a href="javascript:void(0);" onclick="navigateTo('plantillas');" class="text-white bg-purple-600 px-3 py-1 rounded-full hover:bg-purple-700 transition duration-200">Proyectos</a>
+                </nav>
+                
+                <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-blue-500 focus:outline-none p-2 rounded-lg bg-gray-800" aria-label="Abrir Menú Móvil">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}"></path></svg>
+                </button>
+            </div>
+            
+            <nav id="${mobileMenuId}" class="md:hidden ${isMobileMenuOpen ? '' : 'hidden'} bg-gray-900 border-t border-gray-800">
+                <div class="px-4 pt-4 pb-4 space-y-2">
+                    <a href="javascript:void(0);" onclick="navigateTo('quien-soy')" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-800">Quién Soy</a>
+                    <a href="javascript:void(0);" onclick="navigateTo('servicios-informaticos')" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700">Servicios Informáticos</a>
+                    <a href="javascript:void(0);" onclick="navigateTo('plantillas')" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-purple-600 hover:bg-purple-700">Proyectos</a>
+                </div>
+                <div class="border-t border-gray-800 pt-4 px-4 pb-4">
+                    <a href="javascript:void(0);" onclick="navigateTo('home');" class="inline-flex items-center text-2xl font-extrabold text-blue-500 mb-2">
+                        ${LOGO_TAG} rodreyrj
+                    </a>
+                    <p class="text-gray-400 text-sm mt-1">
+                        Soporte técnico y diseños web modernos, rápidos y optimizados.
+                    </p>
+                </div>
+            </nav>
+        `;
+        
+        // Función para generar las tarjetas de series con enlace a WhatsApp
+        // El parámetro `limit` define cuántas series mostrar. Si es null, muestra todas.
+        function generateSeriesHTML(data, limit = null) {
+            if (!data || data.length === 0) {
+                return `<div class="col-span-full text-center p-4 bg-gray-700 rounded-xl text-yellow-400">
+                            No hay series disponibles en este momento.
+                        </div>`;
+            }
+
+            const seriesToDisplay = limit ? data.slice(0, limit) : data;
+
+            let html = seriesToDisplay.map(serie => {
+                // Las propiedades son url, nombre, precio
+                const name = serie.nombre || 'Título Desconocido';
+                const imageUrl = serie.url || `https://placehold.co/200x300/1f2937/ffffff?text=Serie`;
+                const price = serie.precio || 'Consultar';
+                
+                // Generar el mensaje de WhatsApp codificado
+                const whatsappMessage = `Me interesa la serie: *${name}* - con precio de *${price}*. Por favor, dame más información.`;
+                const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                return `
+                    <div class="series-card rounded-xl shadow-lg border border-red-700/50 overflow-hidden">
+                        <div class="h-56 bg-gray-800 overflow-hidden">
+                            <img src="${imageUrl}" 
+                                 alt="Portada de la serie ${name}" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/200x300/1f2937/ffffff?text=Imagen+No+Cargada';">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-white mb-2 truncate">${name}</h4>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="text-2xl font-extrabold text-red-400">${price}</span>
+                                <a href="${whatsappLink}" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="text-sm bg-red-600 text-white py-2 px-4 rounded-full font-bold hover:bg-red-700 transition flex items-center space-x-1">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <span>Me Interesa</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Si estamos en la vista HOME y hay más series que el límite, añade el botón "Ver Más"
+            if (limit && data.length > limit) {
+                html += `
+                    <div class="col-span-full text-center mt-6">
+                        <button onclick="navigateTo('catalogo-series')" 
+                                class="bg-red-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-600 transition transform hover:scale-105 flex items-center justify-center mx-auto space-x-2">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>Ver ${data.length - limit} Series Más</span>
+                        </button>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+
+        const homeContentHTML = `
+            <section class="max-w-4xl mx-auto px-4 py-8 text-center min-h-[50vh] flex flex-col justify-center items-center">
+                <div class="inline-block bg-purple-600/50 text-white text-xs font-semibold px-4 py-1 rounded-full mb-4 border border-purple-500">
+                    SERVICIO TÉCNICO Y WEB
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-white">
+                    Soluciones Informáticas <span class="text-blue-400">para tu Negocio y Hogar</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Mantenimiento de sistemas, seguridad y presencia digital profesional. ¡Trabajamos hasta las 6 PM!
+                </p>
+                <div class="bg-gray-800 p-6 rounded-2xl shadow-xl inline-block w-full md:max-w-md border border-gray-700">
+                    <div id="service-status-message" class="flex items-center justify-center space-x-2 text-yellow-400 mb-4 font-bold text-xl">
+                    </div>
+                    <div id="countdown-timer" class="flex justify-center space-x-3 mb-6">
+                    </div>
+                    <!-- Acción de llamada directa actualizada con el nuevo número -->
+                    <button id="home-action-button" onclick="handleCallNow();" class="w-full bg-red-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:bg-red-700 transition transform hover:scale-[1.01] disabled:bg-gray-600 disabled:cursor-not-allowed">
+                        <span class="text-xl">📞 SOLICITAR SERVICIO AHORA</span>
+                    </button>
+                </div>
+            </section>
+            
+            <!-- SECCIÓN DE SERVICIOS DESTACADOS EN INICIO -->
+            <section class="max-w-6xl mx-auto px-4 py-12 border-t border-gray-800">
+                <h2 class="text-3xl font-bold text-white mb-8 text-center">Nuestros Servicios Principales</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-xl border border-blue-600/50 hover:shadow-blue-500/30 shadow-lg transition">
+                        <span class="text-4xl text-blue-400 mb-3 block">⚙️</span>
+                        <h3 class="text-xl font-semibold text-white mb-2">Instalación y Mantenimiento de SO</h3>
+                        <p class="text-sm text-gray-400">Windows y Linux. Formateo y configuración completa del sistema operativo.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl border border-purple-600/50 hover:shadow-purple-500/30 shadow-lg transition">
+                        <span class="text-4xl text-purple-400 mb-3 block">🌐</span>
+                        <h3 class="text-xl font-semibold text-white mb-2">Creación de Páginas Web y Logos</h3>
+                        <p class="text-sm text-gray-400">Diseño profesional de sitios web, logos y posters para tu marca.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-xl border border-red-600/50 hover:shadow-red-500/30 shadow-lg transition">
+                        <span class="text-4xl text-red-400 mb-3 block">🛡️</span>
+                        <h3 class="text-xl font-semibold text-white mb-2">Seguridad Informática</h3>
+                        <p class="text-sm text-gray-400">Instalación, actualización de antivirus y eliminación de malware/cuentas.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-10">
+                    <a href="javascript:void(0);" onclick="navigateTo('servicios-informaticos');" class="text-blue-400 font-bold hover:text-blue-300 transition">
+                        Ver listado completo de servicios →
+                    </a>
+                </div>
+            </section>
+
+            <!-- SECCIÓN DE CATÁLOGO DE SERIES (SOLO EN INICIO) -->
+            <section class="max-w-6xl mx-auto px-4 py-12 border-t border-gray-800">
+                <h2 class="text-3xl font-bold text-red-400 mb-8 text-center">🍿 Nuestro Catálogo de Series (Destacadas)</h2>
+                <div id="series-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Las tarjetas de series se inyectarán aquí -->
+                </div>
+                <div id="series-loading-message" class="text-center text-xl text-gray-400 mt-10 hidden">
+                    Cargando catálogo...
+                </div>
+            </section>
+        `;
+
+        const secondaryHeaderHTML = (title) => `
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center bg-gray-900 border-b border-gray-800">
+                <a href="javascript:void(0);" onclick="navigateTo('home');" class="flex items-center text-gray-300 hover:text-blue-400 transition duration-300 font-semibold text-sm">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Inicio
+                </a>
+                <h1 class="text-xl font-extrabold text-white">${title}</h1>
+                <a href="javascript:void(0);" onclick="handleCallNow();" class="text-sm font-medium text-blue-500 hover:text-blue-400 hidden sm:block">📞 Llámanos</a>
+            </div>
+        `;
+
+        const quienSoyContentHTML = `
+            <section class="max-w-4xl mx-auto px-4 py-12 pt-20">
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
+                    <h2 class="text-4xl font-bold text-white mb-6 border-b border-gray-700 pb-3">Sobre mí: Soporte y Desarrollo Web</h2>
+                    <p class="text-gray-400 text-lg mb-6">
+                        Soy **rodreyrj**, especialista en soluciones informáticas integrales. Mi objetivo es asegurar que tu tecnología (hardware y software) funcione perfectamente, al mismo tiempo que potenciar tu presencia digital con diseños web profesionales y optimizados.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-400 mb-3">Mi Filosofía</h3>
+                            <p class="text-gray-400">Ofrecer soluciones rápidas y eficientes. Minimizar el tiempo de inactividad de tus equipos y maximizar la visibilidad de tu negocio online.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-blue-400 mb-3">Mis Pilares</h3>
+                            <ul class="list-disc list-inside text-gray-400 space-y-2">
+                                <li>Velocidad en respuesta técnica.</li>
+                                <li>Diseño web 100% profesional.</li>
+                                <li>Compromiso con la seguridad de tus datos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- SECCIÓN DE CONTACTO -->
+                    <div class="mt-10 pt-6 border-t border-gray-700">
+                        <h3 class="text-2xl font-semibold text-blue-400 mb-4">Conéctate Conmigo</h3>
+                        <p class="text-gray-400 mb-6">¡Estoy disponible para cualquier consulta o proyecto! Haz clic para contactarme directamente.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Enlace de WhatsApp -->
+                            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Me interesan sus servicios de soporte informático y diseño web.')}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               class="contact-link whatsapp-bg text-white font-bold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-3">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                <span class="text-sm">WhatsApp ${WHATSAPP_NUMBER}</span>
+                            </a>
+                            
+                            <!-- Enlace de Instagram -->
+                            <a href="${INSTAGRAM_URL}" 
+                               target="_blank" rel="noopener noreferrer" 
+                               class="contact-link instagram-bg text-white font-bold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-3">
+                                <i class="fab fa-instagram text-xl"></i>
+                                <span class="text-sm">Instagram</span>
+                            </a>
+
+                            <!-- Enlace de Correo Electrónico -->
+                            <a href="mailto:${EMAIL_ADDRESS}" 
+                               class="contact-link email-bg text-white font-bold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-3">
+                                <i class="fas fa-envelope text-xl"></i>
+                                <span class="text-sm">${EMAIL_ADDRESS}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- FIN SECCIÓN DE CONTACTO -->
+
+                </div>
+            </section>
+        `;
+        
+        const serviciosInformaticosContentHTML = `
+            <section class="max-w-6xl mx-auto px-4 py-12 pt-20">
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
+                    <h2 class="text-4xl font-bold text-blue-400 mb-6 text-center border-b border-gray-700 pb-3">Servicios de Soporte y Diseño Digital</h2>
+                    <p class="text-gray-400 text-lg mb-8 text-center max-w-3xl mx-auto">
+                        Soluciones técnicas esenciales y herramientas de diseño creativo para asegurar tu máxima operatividad y presencia de marca.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-blue-700/50 shadow-xl">
+                            <div class="text-blue-500 text-4xl mb-4">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Reinstalación de Sistema</h3>
+                            <p class="text-gray-400">Instalación y configuración limpia de sistemas operativos **Windows** y **Linux** para máximo rendimiento.</p>
+                        </div>
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-green-700/50 shadow-xl">
+                            <div class="text-green-500 text-4xl mb-4">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Seguridad y Antivirus</h3>
+                            <p class="text-gray-400">Instalación de **antivirus** líder y **actualización** completa de software esencial del equipo.</p>
+                        </div>
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-purple-700/50 shadow-xl">
+                            <div class="text-purple-500 text-4xl mb-4">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Creación de Páginas Web</h3>
+                            <p class="text-gray-400">Diseño y desarrollo de sitios web profesionales, **responsivos** y optimizados para cualquier plataforma.</p>
+                        </div>
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-yellow-700/50 shadow-xl">
+                            <div class="text-yellow-500 text-4xl mb-4">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Diseño de Logos</h3>
+                            <p class="text-gray-400">Creación de **logos profesionales** y únicos que definen y fortalecen la identidad visual de tu marca.</p>
+                        </div>
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-red-700/50 shadow-xl">
+                            <div class="text-red-500 text-4xl mb-4">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Creación de Póster</h3>
+                            <p class="text-sm text-gray-400">Diseño gráfico de pósters, flyers y material promocional de alto impacto visual para eventos o negocios.</p>
+                        </div>
+                        <div class="service-card bg-gray-900 p-6 rounded-xl border border-gray-700/50 shadow-xl">
+                            <div class="text-gray-500 text-4xl mb-4">
+                                <i class="fas fa-user-times"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Eliminación de Cuentas</h3>
+                            <p class="text-gray-400">Asistencia para la **eliminación segura** y desvinculación de cuentas de **Google** en dispositivos.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-5 bg-blue-900/30 rounded-xl text-center border border-blue-700">
+                        <p class="text-lg font-bold text-white mb-3">¿Necesitas ayuda inmediata? Estamos listos para comenzar.</p>
+                        <!-- Acción de llamada directa actualizada con el nuevo número -->
+                        <button onclick="handleCallNow();" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.02]">
+                            📞 Llámanos para una Cotización Rápida
+                        </button>
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        // Plantilla estática con un contenedor para inyectar datos dinámicos (Proyectos)
+        const basePlantillasContentHTML = `
+            <section class="max-w-7xl mx-auto px-4 py-12 pt-20">
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
+                    <h2 class="text-4xl font-bold text-purple-400 mb-6 border-b border-gray-700 pb-3">Catálogo de Proyectos Realizados</h2>
+                    <p class="text-gray-400 text-lg mb-8">
+                        Nuestros proyectos web más recientes. Haz clic en 'Ver Demo' para previsualizar el proyecto completo.
+                    </p>
+                    <div id="plantillas-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Los proyectos dinámicos se inyectarán aquí -->
+                    </div>
+                    <!-- Mensaje de carga para PROYECTOS -->
+                    <div id="loading-message" class="text-center text-xl text-gray-400 mt-10 hidden">
+                        Preparando proyectos... Un momento por favor.
+                    </div>
+                </div>
+            </section>
+        `;
+
+        // Plantilla estática con un contenedor para inyectar datos dinámicos (Catálogo de Series)
+        const baseSeriesCatalogContentHTML = `
+            <section class="max-w-7xl mx-auto px-4 py-12 pt-20">
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
+                    <h2 class="text-4xl font-bold text-red-400 mb-6 text-center border-b border-gray-700 pb-3">🎬 Catálogo Completo de Series</h2>
+                    <p class="text-gray-400 text-lg mb-8 text-center">
+                        Explora la lista completa de series. Contacta por WhatsApp para más detalles o realizar tu pedido.
+                    </p>
+                    <div id="full-series-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Todas las series dinámicas se inyectarán aquí -->
+                    </div>
+                    <!-- Mensaje de carga para SERIES -->
+                    <div id="series-loading-full" class="text-center text-xl text-gray-400 mt-10 hidden">
+                        Cargando catálogo completo...
+                    </div>
+                </div>
+            </section>
+        `;
+
+
+        // Función para generar las tarjetas de plantillas (proyectos)
+        function generateTemplatesHTML(data) {
+            if (!data || data.length === 0) {
+                return `<div class="col-span-full text-center p-8 bg-gray-700 rounded-xl text-red-400">
+                            No se encontraron proyectos o hubo un error al cargar los datos.
+                        </div>`;
+            }
+
+            return data.map(template => {
+                // Las propiedades son url, proyectoname, host, descripcion
+                const description = template.descripcion || 'Diseño web profesional y responsivo.';
+                const name = template.proyectoname || 'Proyecto Web';
+                const imageUrl = template.url || `https://placehold.co/400x200/3b82f6/ffffff?text=${name}`;
+                
+                return `
+                    <div class="bg-gray-700 p-4 rounded-xl border border-gray-600 shadow-lg hover:shadow-purple-500/30 transition-shadow duration-300">
+                        <div class="h-40 bg-gray-600 rounded-lg mb-3 overflow-hidden">
+                            <img src="${imageUrl}" 
+                                 alt="Vista previa del proyecto ${name}" 
+                                 class="w-full h-full object-cover transition transform hover:scale-105"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/400x200/3b82f6/ffffff?text=Imagen+No+Cargada';">
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">${name}</h3>
+                        <p class="text-sm text-gray-400 mb-3">${description}</p>
+                        <a href="${template.host}" target="_blank" rel="noopener noreferrer" 
+                           class="w-full inline-block text-center bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+                            Ver Demo
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- LÓGICA DE NAVEGACIÓN Y HORARIO ---
+
+        function handleScroll() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) { 
+                header.classList.add('header-shadow-active');
+                header.classList.remove('header-initial');
+            } else if (currentView === 'home') {
+                header.classList.remove('header-shadow-active');
+                header.classList.add('header-initial');
+            }
+        }
+
+        function updateServiceStatus() {
+            const hoursElement = document.getElementById('timer-hours');
+            const minsElement = document.getElementById('timer-mins');
+            const secsElement = document.getElementById('timer-secs');
+            const statusMessage = document.getElementById('service-status-message');
+            const actionButton = document.getElementById('home-action-button');
+
+            if (!hoursElement || !statusMessage || !actionButton) {
+                if (countdownInterval) clearInterval(countdownInterval);
                 return;
             }
 
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.classList.add('item-card'); 
-                
-                let infoHtml;
-                
-                if (type === 'project') {
-                    // Lógica para Proyectos
-                    infoHtml = `
-                        <h4>${item.nombre}</h4>
-                        <p style="font-size: 0.85em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Host: ${item.tercer_campo}</p>
-                        <a href="${item.tercer_campo}" class="project-link" target="_blank">Ver Proyecto <i class="fas fa-external-link-alt"></i></a>
-                    `;
-                } else {
-                    // Lógica para Catálogos (Precio y Estrellas)
-                    const seriesNameEncoded = encodeURIComponent(`Me interesa la serie: ${item.nombre} (Precio: ${item.tercer_campo} CUP)`);
-                    const whatsappLink = `https://wa.me/5356639178?text=${seriesNameEncoded}`;
+            const now = new Date();
+            const closeHour = 18; 
+            
+            const targetTime = new Date(now);
+            targetTime.setHours(closeHour, 0, 0, 0); 
+            
+            let distance = targetTime.getTime() - now.getTime();
 
-                    infoHtml = `
-                        <h4>${item.nombre}</h4>
-                        ${getStarRating(item.tercer_campo)}
-                        <p style="font-size: 1.5em; color: var(--highlight-color); font-weight: 700; margin-bottom: 15px;">${item.tercer_campo} CUP</p>
-                        <a href="${whatsappLink}" class="catalog-whatsapp-button" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Me Interesa
-                        </a>
-                    `;
-                }
+            if (now.getHours() >= closeHour) {
+                statusMessage.innerHTML = '<span class="text-2xl text-red-500">❌</span> SERVICIO CERRADO';
+                actionButton.textContent = 'Servicio Cerrado (Abrimos mañana)';
+                actionButton.disabled = true;
+                
+                // Asegurar que el botón no intente llamar cuando está deshabilitado
+                actionButton.onclick = null; 
+                
+                hoursElement.textContent = '00';
+                minsElement.textContent = '00';
+                secsElement.textContent = '00';
+                return;
+            } 
 
-                card.innerHTML = `
-                    <div class="item-card-controls">
-                        <div class="dot red"></div>
-                        <div class="dot yellow"></div>
-                        <div class="dot green"></div>
-                    </div>
-                    <div class="crown-icon"><i class="fas fa-crown"></i></div>
-                    
-                    <img src="${item.imagen}" 
-                         alt="Imagen de ${item.nombre}"
-                         loading="lazy"    
-                         decoding="async"> 
-                    <div class="item-info">
-                        ${infoHtml}
-                    </div>
+            if (now.getHours() < closeHour) {
+                statusMessage.innerHTML = '<span class="text-xl">⏱️</span> CIERRA EN:';
+                actionButton.textContent = '📞 SOLICITAR SERVICIO AHORA';
+                actionButton.disabled = false;
+                // Restablecer la función de llamada si el servicio está activo
+                actionButton.onclick = handleCallNow; 
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const formatTime = (time) => String(time).padStart(2, '0');
+
+                hoursElement.textContent = formatTime(hours);
+                minsElement.textContent = formatTime(minutes);
+                secsElement.textContent = formatTime(seconds);
+            }
+        }
+
+        function startCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval); 
+            const timerContainer = document.getElementById('countdown-timer');
+            if (timerContainer) {
+                timerContainer.innerHTML = `
+                    <div class="time-box"><span id="timer-hours" class="time-number">--</span><span class="time-label">HORAS</span></div>
+                    <span class="text-blue-500 text-4xl font-bold">:</span>
+                    <div class="time-box"><span id="timer-mins" class="time-number">--</span><span class="time-label">MIN</span></div>
+                    <span class="text-blue-500 text-4xl font-bold">:</span>
+                    <div class="time-box"><span id="timer-secs" class="time-number">--</span><span class="time-label">SEG</span></div>
                 `;
-                container.appendChild(card);
-            });
+            }
+
+            updateServiceStatus(); 
+            countdownInterval = setInterval(updateServiceStatus, 1000); 
         }
 
-        async function fetchAndRenderAllItems() {
-            // Cargar Proyectos
-            PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--primary-color);">Cargando proyectos desde Google Sheets...</p>';
-            try {
-                const response = await fetch(PROJECTS_CSV_URL);
-                if (!response.ok) throw new Error('Error al cargar Proyectos.');
-                const csvText = await response.text();
-                const projects = parseCSV(csvText);
-                renderItems(projects, PROJECTS_CONTAINER, 'project');
-            } catch (error) {
-                console.error("Fallo al cargar los proyectos:", error);
-                PROJECTS_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);">❌ Error al cargar proyectos.</p>';
-            }
+        // Función para renderizar el catálogo de series en la vista de inicio (Limitado)
+        async function renderHomeSeriesCatalog() {
+            const seriesGrid = document.getElementById('series-grid');
+            const loadingMessage = document.getElementById('series-loading-message');
+            
+            if (!seriesGrid) return; 
 
-            // Cargar Catálogos
-            CATALOG_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--primary-color);">Cargando catálogos desde Google Sheets...</p>';
-            try {
-                const response = await fetch(CATALOG_CSV_URL);
-                if (!response.ok) throw new Error('Error al cargar Catálogos.');
-                const csvText = await response.text();
-                const catalogs = parseCSV(csvText);
-                renderItems(catalogs, CATALOG_CONTAINER, 'catalog');
-            } catch (error) {
-                console.error("Fallo al cargar los catálogos:", error);
-                CATALOG_CONTAINER.innerHTML = '<p style="text-align: center; grid-column: 1 / -1; color: var(--highlight-color);">❌ Error al cargar catálogos.</p>';
-            }
-        }
+            // 1. Muestra mensaje de carga
+            if (loadingMessage) loadingMessage.style.display = 'block';
 
-        // --- Efecto de Escritura (Typewriter) ---
-        const typedTextSpan = document.getElementById("typed-text");
-        const roles = ["Desarrollador Web Full Stack", "Especialista en Marketing Digital", "Técnico de Sistemas Certificado"];
-        const typingDelay = 100;
-        const eraseDelay = 50;  
-        const newTextDelay = 2000;
-        let roleIndex = 0;
-        let charIndex = 0;
-
-        function type() {
-            if (charIndex < roles[roleIndex].length) {
-                typedTextSpan.textContent += roles[roleIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(type, typingDelay);
-            } else {
-                setTimeout(erase, newTextDelay);
-            }
-        }
-
-        function erase() {
-            if (charIndex > 0) {
-                typedTextSpan.textContent = roles[roleIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, eraseDelay);
-            } else {
-                roleIndex++;
-                if(roleIndex >= roles.length) roleIndex = 0;
-                setTimeout(type, typingDelay + 500); 
-            }
+            const data = await fetchSeries(); 
+            
+            // 2. Cuando los datos lleguen, oculta el mensaje y renderiza con límite
+            if (loadingMessage) loadingMessage.style.display = 'none';
+            // Limitamos a HOME_SERIES_LIMIT (4) y generamos el botón "Ver Más" si es necesario.
+            seriesGrid.innerHTML = generateSeriesHTML(data, HOME_SERIES_LIMIT);
         }
         
-        // =========================================================
-        // === 4. FUNCIONES DE PROTECCIÓN DE CONTENIDO (ANTIDESCARGA) ===
-        // =========================================================
-        function disableRightClick() {
-            // Deshabilita el menú contextual (clic derecho) en toda la página
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
+        // Función para renderizar el catálogo completo de series
+        async function renderFullSeriesCatalog() {
+            const seriesGrid = document.getElementById('full-series-grid');
+            const loadingMessage = document.getElementById('series-loading-full');
+            
+            if (!seriesGrid) return; 
+
+            // 1. Muestra mensaje de carga
+            if (loadingMessage) loadingMessage.style.display = 'block';
+
+            const data = await fetchSeries(); 
+            
+            // 2. Cuando los datos lleguen, oculta el mensaje y renderiza TODAS las series
+            if (loadingMessage) loadingMessage.style.display = 'none';
+            seriesGrid.innerHTML = generateSeriesHTML(data, null); // Sin límite (muestra todo)
         }
-        
-        function disableDevToolsShortcuts() {
-            document.addEventListener('keydown', function(e) {
-                // Bloquear F12
-                if (e.keyCode == 123) { 
-                    e.preventDefault();
+
+
+        async function renderView(viewName) {
+            let headerHTML = '';
+            let contentHTML = '';
+            let pageTitle = '';
+            let needsAsyncRender = false;
+
+            // 1. Determinar el contenido de la vista
+            switch (viewName) {
+                case 'home':
+                    pageTitle = 'rodreyrj | Inicio';
+                    headerHTML = homeHeaderHTML(false);
+                    contentHTML = homeContentHTML;
+                    break;
+                case 'quien-soy':
+                    pageTitle = 'Quién Soy';
+                    headerHTML = secondaryHeaderHTML(pageTitle);
+                    contentHTML = quienSoyContentHTML;
+                    break;
+                case 'servicios-informaticos':
+                    pageTitle = 'Servicios Informáticos';
+                    headerHTML = secondaryHeaderHTML(pageTitle);
+                    contentHTML = serviciosInformaticosContentHTML;
+                    break;
+                case 'plantillas':
+                    pageTitle = 'Proyectos'; 
+                    headerHTML = secondaryHeaderHTML(pageTitle);
+                    contentHTML = basePlantillasContentHTML;
+                    needsAsyncRender = true; // Necesita renderizado asíncrono de proyectos
+                    break;
+                case 'catalogo-series':
+                    pageTitle = 'Catálogo de Series'; 
+                    headerHTML = secondaryHeaderHTML(pageTitle); // Usa el header secundario para esta vista
+                    contentHTML = baseSeriesCatalogContentHTML;
+                    needsAsyncRender = true; // Necesita renderizado asíncrono de series
+                    break;
+                default:
+                    renderView('home');
+                    return;
+            }
+
+            // 2. Realizar la transición visual
+            mainContent.style.opacity = '0';
+            
+            setTimeout(async () => {
+                // 3. Actualizar el contenido y las clases
+                currentView = viewName;
+                document.title = pageTitle;
+                
+                headerContainer.innerHTML = headerHTML;
+                mainContent.innerHTML = contentHTML;
+                
+                // Limpiar y restablecer el listener de scroll
+                if (viewName !== 'home') {
+                    headerContainer.classList.add('header-shadow-active');
+                    window.removeEventListener('scroll', handleScroll);
+                } else {
+                    window.addEventListener('scroll', handleScroll);
+                    handleScroll(); 
                 }
                 
-                // Bloquear Ctrl+Shift+I/J/C y Ctrl+U (Ver Código Fuente)
-                if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) {
-                    e.preventDefault();
+                // 4. Iniciar/Detener lógica específica de la vista
+                if (viewName === 'home') {
+                    startCountdown(); 
+                    await renderHomeSeriesCatalog(); // Renderiza series limitadas
+                } else {
+                    if (countdownInterval) clearInterval(countdownInterval); 
                 }
-                if (e.ctrlKey && e.keyCode == 85) { // Ctrl+U
-                    e.preventDefault();
+
+                // 5. Manejo del contenido asíncrono (Proyectos y Catálogo de Series)
+                if (needsAsyncRender) {
+                    if (viewName === 'plantillas') {
+                        const templatesGrid = document.getElementById('plantillas-grid');
+                        const loadingMessage = document.getElementById('loading-message');
+                        if (loadingMessage) loadingMessage.style.display = 'block';
+
+                        const data = await fetchTemplates(); 
+                        if (loadingMessage) loadingMessage.style.display = 'none';
+                        templatesGrid.innerHTML = generateTemplatesHTML(data);
+                    } else if (viewName === 'catalogo-series') {
+                        await renderFullSeriesCatalog(); // Renderiza todas las series
+                    }
                 }
-            });
+
+                // 6. Finalizar la transición
+                window.scrollTo(0, 0);
+                mainContent.style.opacity = '1';
+
+                // 7. Re-adjuntar listener del menú móvil (ESENCIAL)
+                const menuButton = document.getElementById('menu-toggle');
+                if (menuButton) {
+                    menuButton.removeEventListener('click', toggleMenu); 
+                    menuButton.addEventListener('click', toggleMenu);
+                }
+
+            }, 300); 
         }
 
+        // 8. Función de Navegación Global
+        function navigateTo(viewName) {
+            const mobileMenu = document.getElementById(mobileMenuId);
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                toggleMenu(); 
+            }
+            renderView(viewName);
+        }
 
-        // =========================================================
-        // === 5. EVENT LISTENERS E INICIALIZACIÓN ===
-        // =========================================================
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const themeTogglePC = document.getElementById('theme-toggle-pc');
-            const themeToggleMobile = document.getElementById('theme-toggle-mobile-header');
-            const hamburger = document.getElementById('hamburger-menu');
-
-            // Manejar clics en logo, menú de PC, móvil y botones CTA
-            document.querySelectorAll('.page-link, .nav-links span, .mobile-menu div, .logo span').forEach(element => {
-                element.addEventListener('click', function () {
-                    let targetId = this.getAttribute('data-target');
-                    if (!targetId && this.tagName === 'SPAN' && this.parentElement.classList.contains('logo')) {
-                        targetId = 'hero';
+        // 9. Función para el menú móvil
+        function toggleMenu() {
+            const mobileMenu = document.getElementById(mobileMenuId);
+            if (mobileMenu) {
+                const isOpen = mobileMenu.classList.toggle('hidden');
+                // Al abrir/cerrar el menú, re-renderizamos el header para asegurar la vinculación
+                if (currentView === 'home') {
+                    headerContainer.innerHTML = homeHeaderHTML(!isOpen);
+                    // Re-adjuntar listener del menú móvil (ESENCIAL)
+                    const menuButton = document.getElementById('menu-toggle');
+                    if (menuButton) {
+                        menuButton.removeEventListener('click', toggleMenu); 
+                        menuButton.addEventListener('click', toggleMenu);
                     }
-                    
-                    if (targetId) {
-                        showSection(targetId);
-                    }
-                });
-            });
-
-            // Eventos de botones
-            hamburger.addEventListener('click', () => { mobileLinks.classList.toggle('active'); });
-            if (themeTogglePC) themeTogglePC.addEventListener('click', toggleTheme);
-            if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-            
-            loadTheme();
-            fetchAndRenderAllItems(); // Cargar ambos: Proyectos y Catálogos
-            if(roles.length) setTimeout(type, 1500);
-            
-            // Iniciar en la página principal y marcar activo
-            showSection('hero'); 
-            document.querySelector('.nav-link[data-target="hero"]').classList.add('active-scroll');
-
-            // Aplicar funciones de seguridad
-            disableRightClick();
-            disableDevToolsShortcuts();
-        });
+                }
+            }
+        }
+        
+        // --- INICIALIZACIÓN ---
+        window.onload = function() {
+            // OPTIMIZACIÓN: Iniciamos la precarga de AMBOS catálogos tan pronto como la página carga.
+            fetchTemplates(); 
+            fetchSeries(); 
+            renderView('home');
+            window.addEventListener('scroll', handleScroll); 
+        };
     </script>
+
 </body>
-                        </html>
+</html>
