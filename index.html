@@ -156,99 +156,96 @@
         const LOGO_URL = "https://i.postimg.cc/J06sCDBm/unnamed-7-removebg-preview.png";
         const LOGO_TAG = `<img src="${LOGO_URL}" alt="Logo de rodreyrj - Rayo" class="logo-img mr-3">`;
         
-        // URL del CSV con los datos de los proyectos
+        // URLs de los CSV
         const TEMPLATES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTurxcfqNiMeXwH7GdrsL1MGih4HhKv7cS_g7JRgwu17i2IGeaaUV8FlMrir-f7wf9SgRw6g4WLw1BH/pub?output=csv";
-        
-        // URL del CSV para el Catálogo de Series
         const SERIES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQMqFFyVFUM9e157cdDMwcX7DGmOj8DuL8ZUHMw9QAnNYn-tG1dDZ_u89Za19QPHjIvpBvc-q9E1SQR/pub?output=csv";
 
-        // Número de WhatsApp (se utiliza para el enlace de WhatsApp)
+        // Contactos
         const WHATSAPP_NUMBER = "56639178"; 
-        
-        // NÚMERO DE TELÉFONO PARA LLAMADA DIRECTA (ACTUALIZADO A CUBA +53)
         const PHONE_NUMBER = "+5356639178"; 
-        
-        // Correo del usuario
         const EMAIL_ADDRESS = "edgarromerocuc94@gmail.com"; 
-        
-        // Instagram del usuario
         const INSTAGRAM_URL = "https://www.instagram.com/rodreyrj?igsh=MWV0OTh0cGE3M2EzbA==";
 
-        // Límite de series a mostrar en la vista HOME
+        // Lógica de Vistas
         const HOME_SERIES_LIMIT = 4;
-
-
         const mainContent = document.getElementById('main-content');
         const headerContainer = document.getElementById('main-header');
         const mobileMenuId = 'mobile-menu'; 
         let currentView = 'home';
         let countdownInterval;
-        
-        // Caché para los datos (Proyectos y Series)
-        let templatesData = null; // Caché para los proyectos (plantillas)
-        let seriesData = null;    // Caché para las series
+        let isMobileMenuOpen = false; // Estado del menú móvil
 
-        // --- LÓGICA DE DATOS CSV ---
+        // --- CACHÉ Y PROMESAS DE DATOS (OPTIMIZACIÓN) ---
+        let templatesData = null; 
+        let templatesPromise = null;
+        let seriesData = null;    
+        let seriesPromise = null;
 
+        // Función auxiliar para parsear CSV
         function csvToArray(text) {
             const rows = text.trim().split('\n');
             if (rows.length < 2) return [];
             
-            // Los encabezados se toman de la primera fila
             const headers = rows[0].split(',').map(h => h.trim());
-            
             const data = [];
             for (let i = 1; i < rows.length; i++) {
-                // Usamos una regex para manejar comas dentro de comillas (si las hubiera, aunque el split simple es suficiente para hojas de cálculo simples)
                 const values = rows[i].split(',').map(v => v.trim());
                 if (values.length !== headers.length) continue; 
 
                 const item = {};
                 headers.forEach((header, index) => {
-                    // Normalizar el nombre de la propiedad
                     let cleanHeader = header.toLowerCase().replace(/[^a-z0-9]/g, '');
                     item[cleanHeader] = values[index];
                 });
-
                 data.push(item);
             }
             return data;
         }
 
-        // Función de obtención de datos con caché (Para Proyectos/Plantillas)
+        // Función de obtención de datos con caché y promesa única (Optimizado)
         async function fetchTemplates() {
             if (templatesData) return templatesData; 
-
-            try {
-                const response = await fetch(TEMPLATES_CSV_URL);
-                if (!response.ok) throw new Error(`Error al cargar el CSV de Proyectos: ${response.statusText}`);
-                const csvText = await response.text();
-                // Asumiendo el orden de la hoja de proyectos: URL, Proyecto-Name, Host, Descripcion
-                const data = csvToArray(csvText); 
-                templatesData = data; 
-                return data;
-            } catch (error) {
-                console.error("Error fetching or parsing templates:", error);
-                return []; 
+            if (!templatesPromise) {
+                templatesPromise = (async () => {
+                    try {
+                        const response = await fetch(TEMPLATES_CSV_URL);
+                        if (!response.ok) throw new Error(`Error al cargar el CSV de Proyectos: ${response.statusText}`);
+                        const csvText = await response.text();
+                        templatesData = csvToArray(csvText); 
+                        return templatesData;
+                    } catch (error) {
+                        console.error("Error fetching or parsing templates:", error);
+                        templatesData = [];
+                        return []; 
+                    } finally {
+                        templatesPromise = null; // Liberar la promesa después de la resolución/rechazo
+                    }
+                })();
             }
+            return templatesPromise;
         }
         
-        // Función de obtención de datos con caché (Para Series)
+        // Función de obtención de datos con caché y promesa única (Optimizado)
         async function fetchSeries() {
             if (seriesData) return seriesData; 
-
-            try {
-                const response = await fetch(SERIES_CSV_URL);
-                if (!response.ok) throw new Error(`Error al cargar el CSV de Series: ${response.statusText}`);
-                const csvText = await response.text();
-                // Asumiendo el orden de la hoja de series: url, nombre, precio
-                const data = csvToArray(csvText);
-                seriesData = data;
-                return data;
-            } catch (error) {
-                console.error("Error fetching or parsing series:", error);
-                return []; 
+            if (!seriesPromise) {
+                seriesPromise = (async () => {
+                    try {
+                        const response = await fetch(SERIES_CSV_URL);
+                        if (!response.ok) throw new Error(`Error al cargar el CSV de Series: ${response.statusText}`);
+                        const csvText = await response.text();
+                        seriesData = csvToArray(csvText);
+                        return seriesData;
+                    } catch (error) {
+                        console.error("Error fetching or parsing series:", error);
+                        seriesData = [];
+                        return []; 
+                    } finally {
+                        seriesPromise = null; // Liberar la promesa después de la resolución/rechazo
+                    }
+                })();
             }
+            return seriesPromise;
         }
 
 
@@ -256,11 +253,10 @@
         
         // Función de manejo del botón de Llamada
         function handleCallNow() {
-            // Usa el prefijo tel: para iniciar una llamada con el número actualizado
             window.location.href = `tel:${PHONE_NUMBER}`;
         }
 
-        const homeHeaderHTML = (isMobileMenuOpen) => `
+        const homeHeaderHTML = () => `
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
                 <a href="javascript:void(0);" onclick="navigateTo('home');" class="flex items-center text-3xl font-extrabold text-blue-500 hover:text-blue-400 transition duration-300">
                     ${LOGO_TAG} rodreyrj
@@ -273,7 +269,7 @@
                 </nav>
                 
                 <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-blue-500 focus:outline-none p-2 rounded-lg bg-gray-800" aria-label="Abrir Menú Móvil">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}"></path></svg>
                 </button>
             </div>
             
@@ -295,7 +291,6 @@
         `;
         
         // Función para generar las tarjetas de series con enlace a WhatsApp
-        // El parámetro `limit` define cuántas series mostrar. Si es null, muestra todas.
         function generateSeriesHTML(data, limit = null) {
             if (!data || data.length === 0) {
                 return `<div class="col-span-full text-center p-4 bg-gray-700 rounded-xl text-yellow-400">
@@ -306,12 +301,10 @@
             const seriesToDisplay = limit ? data.slice(0, limit) : data;
 
             let html = seriesToDisplay.map(serie => {
-                // Las propiedades son url, nombre, precio
                 const name = serie.nombre || 'Título Desconocido';
                 const imageUrl = serie.url || `https://placehold.co/200x300/1f2937/ffffff?text=Serie`;
                 const price = serie.precio || 'Consultar';
                 
-                // Generar el mensaje de WhatsApp codificado
                 const whatsappMessage = `Me interesa la serie: *${name}* - con precio de *${price}*. Por favor, dame más información.`;
                 const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
                 
@@ -340,7 +333,6 @@
                 `;
             }).join('');
             
-            // Si estamos en la vista HOME y hay más series que el límite, añade el botón "Ver Más"
             if (limit && data.length > limit) {
                 html += `
                     <div class="col-span-full text-center mt-6">
@@ -383,17 +375,17 @@
             <section class="max-w-6xl mx-auto px-4 py-12 border-t border-gray-800">
                 <h2 class="text-3xl font-bold text-white mb-8 text-center">Nuestros Servicios Principales</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gray-800 p-6 rounded-xl border border-blue-600/50 hover:shadow-blue-500/30 shadow-lg transition">
+                    <div class="service-card bg-gray-800 p-6 rounded-xl border border-blue-600/50 hover:shadow-blue-500/30 shadow-lg transition">
                         <span class="text-4xl text-blue-400 mb-3 block">⚙️</span>
                         <h3 class="text-xl font-semibold text-white mb-2">Instalación y Mantenimiento de SO</h3>
                         <p class="text-sm text-gray-400">Windows y Linux. Formateo y configuración completa del sistema operativo.</p>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-xl border border-purple-600/50 hover:shadow-purple-500/30 shadow-lg transition">
+                    <div class="service-card bg-gray-800 p-6 rounded-xl border border-purple-600/50 hover:shadow-purple-500/30 shadow-lg transition">
                         <span class="text-4xl text-purple-400 mb-3 block">🌐</span>
                         <h3 class="text-xl font-semibold text-white mb-2">Creación de Páginas Web y Logos</h3>
                         <p class="text-sm text-gray-400">Diseño profesional de sitios web, logos y posters para tu marca.</p>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-xl border border-red-600/50 hover:shadow-red-500/30 shadow-lg transition">
+                    <div class="service-card bg-gray-800 p-6 rounded-xl border border-red-600/50 hover:shadow-red-500/30 shadow-lg transition">
                         <span class="text-4xl text-red-400 mb-3 block">🛡️</span>
                         <h3 class="text-xl font-semibold text-white mb-2">Seguridad Informática</h3>
                         <p class="text-sm text-gray-400">Instalación, actualización de antivirus y eliminación de malware/cuentas.</p>
@@ -429,6 +421,7 @@
             </div>
         `;
 
+        // ... (el resto de plantillas HTML, ya que no afectan la performance de carga)
         const quienSoyContentHTML = `
             <section class="max-w-4xl mx-auto px-4 py-12 pt-20">
                 <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
@@ -551,7 +544,6 @@
             </section>
         `;
         
-        // Plantilla estática con un contenedor para inyectar datos dinámicos (Proyectos)
         const basePlantillasContentHTML = `
             <section class="max-w-7xl mx-auto px-4 py-12 pt-20">
                 <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
@@ -563,14 +555,13 @@
                         <!-- Los proyectos dinámicos se inyectarán aquí -->
                     </div>
                     <!-- Mensaje de carga para PROYECTOS -->
-                    <div id="loading-message" class="text-center text-xl text-gray-400 mt-10 hidden">
+                    <div id="loading-message" class="text-center text-xl text-gray-400 mt-10">
                         Preparando proyectos... Un momento por favor.
                     </div>
                 </div>
             </section>
         `;
 
-        // Plantilla estática con un contenedor para inyectar datos dinámicos (Catálogo de Series)
         const baseSeriesCatalogContentHTML = `
             <section class="max-w-7xl mx-auto px-4 py-12 pt-20">
                 <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
@@ -582,7 +573,7 @@
                         <!-- Todas las series dinámicas se inyectarán aquí -->
                     </div>
                     <!-- Mensaje de carga para SERIES -->
-                    <div id="series-loading-full" class="text-center text-xl text-gray-400 mt-10 hidden">
+                    <div id="series-loading-full" class="text-center text-xl text-gray-400 mt-10">
                         Cargando catálogo completo...
                     </div>
                 </div>
@@ -599,7 +590,6 @@
             }
 
             return data.map(template => {
-                // Las propiedades son url, proyectoname, host, descripcion
                 const description = template.descripcion || 'Diseño web profesional y responsivo.';
                 const name = template.proyectoname || 'Proyecto Web';
                 const imageUrl = template.url || `https://placehold.co/400x200/3b82f6/ffffff?text=${name}`;
@@ -661,7 +651,6 @@
                 actionButton.textContent = 'Servicio Cerrado (Abrimos mañana)';
                 actionButton.disabled = true;
                 
-                // Asegurar que el botón no intente llamar cuando está deshabilitado
                 actionButton.onclick = null; 
                 
                 hoursElement.textContent = '00';
@@ -674,7 +663,6 @@
                 statusMessage.innerHTML = '<span class="text-xl">⏱️</span> CIERRA EN:';
                 actionButton.textContent = '📞 SOLICITAR SERVICIO AHORA';
                 actionButton.disabled = false;
-                // Restablecer la función de llamada si el servicio está activo
                 actionButton.onclick = handleCallNow; 
                 
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -706,130 +694,137 @@
             countdownInterval = setInterval(updateServiceStatus, 1000); 
         }
 
-        // Función para renderizar el catálogo de series en la vista de inicio (Limitado)
-        async function renderHomeSeriesCatalog() {
-            const seriesGrid = document.getElementById('series-grid');
-            const loadingMessage = document.getElementById('series-loading-message');
+        // Función para renderizar las tarjetas de Series (usada en Home y Catálogo)
+        async function renderSeriesCatalog(limit = null) {
+            const gridId = limit ? 'series-grid' : 'full-series-grid';
+            const loadingId = limit ? 'series-loading-message' : 'series-loading-full';
+            
+            const seriesGrid = document.getElementById(gridId);
+            const loadingMessage = document.getElementById(loadingId);
             
             if (!seriesGrid) return; 
 
-            // 1. Muestra mensaje de carga
+            // 1. Mostrar mensaje de carga inmediatamente
             if (loadingMessage) loadingMessage.style.display = 'block';
 
-            const data = await fetchSeries(); 
-            
-            // 2. Cuando los datos lleguen, oculta el mensaje y renderiza con límite
-            if (loadingMessage) loadingMessage.style.display = 'none';
-            // Limitamos a HOME_SERIES_LIMIT (4) y generamos el botón "Ver Más" si es necesario.
-            seriesGrid.innerHTML = generateSeriesHTML(data, HOME_SERIES_LIMIT);
+            try {
+                // Esperar que la promesa de datos se resuelva
+                const data = await fetchSeries(); 
+                
+                // 2. Renderizar contenido
+                seriesGrid.innerHTML = generateSeriesHTML(data, limit);
+            } catch (error) {
+                seriesGrid.innerHTML = `<div class="col-span-full text-center p-4 bg-gray-700 rounded-xl text-red-400">
+                                            Error al cargar el catálogo de series.
+                                        </div>`;
+            } finally {
+                // 3. Ocultar mensaje de carga
+                if (loadingMessage) loadingMessage.style.display = 'none';
+            }
         }
         
-        // Función para renderizar el catálogo completo de series
-        async function renderFullSeriesCatalog() {
-            const seriesGrid = document.getElementById('full-series-grid');
-            const loadingMessage = document.getElementById('series-loading-full');
-            
-            if (!seriesGrid) return; 
+        // Función para renderizar las tarjetas de Proyectos
+        async function renderTemplates() {
+            const templatesGrid = document.getElementById('plantillas-grid');
+            const loadingMessage = document.getElementById('loading-message');
 
-            // 1. Muestra mensaje de carga
+            if (!templatesGrid) return; 
+
+            // 1. Mostrar mensaje de carga inmediatamente
             if (loadingMessage) loadingMessage.style.display = 'block';
 
-            const data = await fetchSeries(); 
-            
-            // 2. Cuando los datos lleguen, oculta el mensaje y renderiza TODAS las series
-            if (loadingMessage) loadingMessage.style.display = 'none';
-            seriesGrid.innerHTML = generateSeriesHTML(data, null); // Sin límite (muestra todo)
+            try {
+                // Esperar que la promesa de datos se resuelva
+                const data = await fetchTemplates(); 
+                
+                // 2. Renderizar contenido
+                templatesGrid.innerHTML = generateTemplatesHTML(data);
+            } catch (error) {
+                templatesGrid.innerHTML = `<div class="col-span-full text-center p-8 bg-gray-700 rounded-xl text-red-400">
+                                                Error al cargar los proyectos.
+                                            </div>`;
+            } finally {
+                // 3. Ocultar mensaje de carga
+                if (loadingMessage) loadingMessage.style.display = 'none';
+            }
         }
 
 
         async function renderView(viewName) {
-            let headerHTML = '';
-            let contentHTML = '';
             let pageTitle = '';
+            let contentHTML = '';
             let needsAsyncRender = false;
 
             // 1. Determinar el contenido de la vista
             switch (viewName) {
                 case 'home':
                     pageTitle = 'rodreyrj | Inicio';
-                    headerHTML = homeHeaderHTML(false);
                     contentHTML = homeContentHTML;
                     break;
                 case 'quien-soy':
                     pageTitle = 'Quién Soy';
-                    headerHTML = secondaryHeaderHTML(pageTitle);
                     contentHTML = quienSoyContentHTML;
                     break;
                 case 'servicios-informaticos':
                     pageTitle = 'Servicios Informáticos';
-                    headerHTML = secondaryHeaderHTML(pageTitle);
                     contentHTML = serviciosInformaticosContentHTML;
                     break;
                 case 'plantillas':
                     pageTitle = 'Proyectos'; 
-                    headerHTML = secondaryHeaderHTML(pageTitle);
                     contentHTML = basePlantillasContentHTML;
-                    needsAsyncRender = true; // Necesita renderizado asíncrono de proyectos
+                    needsAsyncRender = true;
                     break;
                 case 'catalogo-series':
                     pageTitle = 'Catálogo de Series'; 
-                    headerHTML = secondaryHeaderHTML(pageTitle); // Usa el header secundario para esta vista
                     contentHTML = baseSeriesCatalogContentHTML;
-                    needsAsyncRender = true; // Necesita renderizado asíncrono de series
+                    needsAsyncRender = true;
                     break;
                 default:
                     renderView('home');
                     return;
             }
 
-            // 2. Realizar la transición visual
+            // 2. Realizar la transición visual y actualizar header/content
             mainContent.style.opacity = '0';
             
             setTimeout(async () => {
-                // 3. Actualizar el contenido y las clases
+                
+                // A. Actualizar estado y contenido base
                 currentView = viewName;
                 document.title = pageTitle;
+                isMobileMenuOpen = false; // Asegurar que el menú se cierre al cambiar de vista
                 
-                headerContainer.innerHTML = headerHTML;
+                headerContainer.innerHTML = (viewName === 'home') ? homeHeaderHTML() : secondaryHeaderHTML(pageTitle);
                 mainContent.innerHTML = contentHTML;
                 
-                // Limpiar y restablecer el listener de scroll
-                if (viewName !== 'home') {
-                    headerContainer.classList.add('header-shadow-active');
-                    window.removeEventListener('scroll', handleScroll);
-                } else {
-                    window.addEventListener('scroll', handleScroll);
-                    handleScroll(); 
-                }
-                
-                // 4. Iniciar/Detener lógica específica de la vista
+                // B. Control de scroll y temporizador
                 if (viewName === 'home') {
                     startCountdown(); 
-                    await renderHomeSeriesCatalog(); // Renderiza series limitadas
+                    window.addEventListener('scroll', handleScroll);
+                    handleScroll(); 
                 } else {
                     if (countdownInterval) clearInterval(countdownInterval); 
+                    window.removeEventListener('scroll', handleScroll);
+                    headerContainer.classList.add('header-shadow-active');
+                }
+                
+                // C. Manejo del contenido asíncrono (sin esperar a las promesas aquí)
+                if (viewName === 'home') {
+                    // Carga y renderizado de series destacadas
+                    renderSeriesCatalog(HOME_SERIES_LIMIT);
+                } else if (viewName === 'plantillas') {
+                    // Carga y renderizado de proyectos
+                    renderTemplates();
+                } else if (viewName === 'catalogo-series') {
+                    // Carga y renderizado del catálogo completo de series
+                    renderSeriesCatalog(null); 
                 }
 
-                // 5. Manejo del contenido asíncrono (Proyectos y Catálogo de Series)
-                if (needsAsyncRender) {
-                    if (viewName === 'plantillas') {
-                        const templatesGrid = document.getElementById('plantillas-grid');
-                        const loadingMessage = document.getElementById('loading-message');
-                        if (loadingMessage) loadingMessage.style.display = 'block';
-
-                        const data = await fetchTemplates(); 
-                        if (loadingMessage) loadingMessage.style.display = 'none';
-                        templatesGrid.innerHTML = generateTemplatesHTML(data);
-                    } else if (viewName === 'catalogo-series') {
-                        await renderFullSeriesCatalog(); // Renderiza todas las series
-                    }
-                }
-
-                // 6. Finalizar la transición
+                // D. Finalizar la transición
                 window.scrollTo(0, 0);
                 mainContent.style.opacity = '1';
 
-                // 7. Re-adjuntar listener del menú móvil (ESENCIAL)
+                // E. Re-adjuntar listener del menú móvil (ESENCIAL)
                 const menuButton = document.getElementById('menu-toggle');
                 if (menuButton) {
                     menuButton.removeEventListener('click', toggleMenu); 
@@ -839,40 +834,42 @@
             }, 300); 
         }
 
-        // 8. Función de Navegación Global
-        function navigateTo(viewName) {
+        // Función para el menú móvil
+        function toggleMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
             const mobileMenu = document.getElementById(mobileMenuId);
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            
+            if (mobileMenu) {
+                // Simplemente alterna la clase y re-renderiza el header para actualizar el ícono
+                mobileMenu.classList.toggle('hidden', !isMobileMenuOpen);
+                headerContainer.innerHTML = homeHeaderHTML();
+                
+                // Re-adjuntar listener del menú móvil después de re-renderizar
+                const menuButton = document.getElementById('menu-toggle');
+                if (menuButton) {
+                    menuButton.removeEventListener('click', toggleMenu); 
+                    menuButton.addEventListener('click', toggleMenu);
+                }
+            }
+        }
+        
+        // Función de Navegación Global
+        function navigateTo(viewName) {
+            if (isMobileMenuOpen) {
                 toggleMenu(); 
             }
             renderView(viewName);
         }
 
-        // 9. Función para el menú móvil
-        function toggleMenu() {
-            const mobileMenu = document.getElementById(mobileMenuId);
-            if (mobileMenu) {
-                const isOpen = mobileMenu.classList.toggle('hidden');
-                // Al abrir/cerrar el menú, re-renderizamos el header para asegurar la vinculación
-                if (currentView === 'home') {
-                    headerContainer.innerHTML = homeHeaderHTML(!isOpen);
-                    // Re-adjuntar listener del menú móvil (ESENCIAL)
-                    const menuButton = document.getElementById('menu-toggle');
-                    if (menuButton) {
-                        menuButton.removeEventListener('click', toggleMenu); 
-                        menuButton.addEventListener('click', toggleMenu);
-                    }
-                }
-            }
-        }
-        
         // --- INICIALIZACIÓN ---
         window.onload = function() {
-            // OPTIMIZACIÓN: Iniciamos la precarga de AMBOS catálogos tan pronto como la página carga.
+            // OPTIMIZACIÓN: Iniciamos la precarga de AMBOS catálogos inmediatamente para que estén en caché
+            // cuando el usuario navegue a esas vistas.
             fetchTemplates(); 
             fetchSeries(); 
+            
             renderView('home');
-            window.addEventListener('scroll', handleScroll); 
+            window.addEventListener('scroll', handleScroll);
         };
     </script>
 
