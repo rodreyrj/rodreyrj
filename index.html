@@ -17,6 +17,18 @@
             color: #e5e7eb; /* Texto claro */
             scroll-behavior: smooth;
         }
+        /* CLASE GLOBAL DE SEGURIDAD: Previene la selección de texto */
+        .no-interaction {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        /* REGLA DE SEGURIDAD: Deshabilita la interacción directa con las imágenes */
+        .series-card img, .project-image {
+            pointer-events: none; 
+        }
+
         .header-shadow-active {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             background-color: #111827;
@@ -24,6 +36,12 @@
         }
         .header-initial {
             background-color: transparent;
+        }
+        .logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.2);
         }
         .time-box {
             background-color: #374151;
@@ -46,12 +64,6 @@
             color: #9ca3af;
             margin-top: 0.25rem;
         }
-        .logo-img {
-            height: 48px;
-            width: auto;
-            object-fit: contain;
-            filter: brightness(1.2);
-        }
         .service-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
@@ -72,7 +84,6 @@
             transform: scale(1.02);
             box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3); /* Sombra roja */
         }
-
         /* Estilo para los botones de contacto en Quién Soy */
         .contact-link {
             transition: background-color 0.3s ease, transform 0.2s ease;
@@ -85,7 +96,7 @@
         .email-bg:hover { background-color: #D62D20; transform: translateY(-2px); }
     </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900 no-interaction">
 
     <!-- Header Contenedor - Se actualiza dinámicamente -->
     <header id="main-header" class="header-initial fixed top-0 left-0 z-50 w-full transition duration-300 ease-in-out">
@@ -218,7 +229,7 @@
                         templatesData = [];
                         return []; 
                     } finally {
-                        templatesPromise = null; // Liberar la promesa después de la resolución/rechazo
+                        templatesPromise = null; 
                     }
                 })();
             }
@@ -241,7 +252,7 @@
                         seriesData = [];
                         return []; 
                     } finally {
-                        seriesPromise = null; // Liberar la promesa después de la resolución/rechazo
+                        seriesPromise = null; 
                     }
                 })();
             }
@@ -311,9 +322,11 @@
                 return `
                     <div class="series-card rounded-xl shadow-lg border border-red-700/50 overflow-hidden">
                         <div class="h-56 bg-gray-800 overflow-hidden">
+                            <!-- IMAGEN CON SEGURIDAD -->
                             <img src="${imageUrl}" 
+                                 draggable="false"
                                  alt="Portada de la serie ${name}" 
-                                 class="w-full h-full object-cover"
+                                 class="w-full h-full object-cover no-interaction"
                                  onerror="this.onerror=null; this.src='https://placehold.co/200x300/1f2937/ffffff?text=Imagen+No+Cargada';">
                         </div>
                         <div class="p-4">
@@ -421,7 +434,6 @@
             </div>
         `;
 
-        // ... (el resto de plantillas HTML, ya que no afectan la performance de carga)
         const quienSoyContentHTML = `
             <section class="max-w-4xl mx-auto px-4 py-12 pt-20">
                 <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
@@ -597,9 +609,11 @@
                 return `
                     <div class="bg-gray-700 p-4 rounded-xl border border-gray-600 shadow-lg hover:shadow-purple-500/30 transition-shadow duration-300">
                         <div class="h-40 bg-gray-600 rounded-lg mb-3 overflow-hidden">
+                            <!-- IMAGEN CON SEGURIDAD -->
                             <img src="${imageUrl}" 
+                                 draggable="false"
                                  alt="Vista previa del proyecto ${name}" 
-                                 class="w-full h-full object-cover transition transform hover:scale-105"
+                                 class="w-full h-full object-cover transition transform hover:scale-105 no-interaction project-image"
                                  onerror="this.onerror=null; this.src='https://placehold.co/400x200/3b82f6/ffffff?text=Imagen+No+Cargada';">
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-2">${name}</h3>
@@ -860,11 +874,35 @@
             }
             renderView(viewName);
         }
+        
+        // --- FUNCIONES DE SEGURIDAD Y PROTECCIÓN DE CONTENIDO ---
+        function disableContentTheft(e) {
+            // 1. Bloquear Clic Derecho (menú contextual)
+            if (e.type === 'contextmenu') {
+                e.preventDefault();
+                return;
+            }
+
+            // 2. Bloquear Teclas de Desarrollador (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+            if (e.type === 'keydown') {
+                // Bloquear F12
+                if (e.keyCode === 123) {
+                    e.preventDefault();
+                }
+                // Bloquear Ctrl+Shift+I (73), Ctrl+Shift+J (74), Ctrl+Shift+C (67), Ctrl+U (85)
+                if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67) || (e.ctrlKey && e.keyCode === 85)) {
+                    e.preventDefault();
+                }
+            }
+        }
 
         // --- INICIALIZACIÓN ---
         window.onload = function() {
+            // Adjuntar listeners de seguridad al inicio
+            document.addEventListener('contextmenu', disableContentTheft);
+            document.addEventListener('keydown', disableContentTheft);
+            
             // OPTIMIZACIÓN: Iniciamos la precarga de AMBOS catálogos inmediatamente para que estén en caché
-            // cuando el usuario navegue a esas vistas.
             fetchTemplates(); 
             fetchSeries(); 
             
