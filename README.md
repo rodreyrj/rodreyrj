@@ -21,43 +21,52 @@ Trabajo en desarrollo web, automatización, diseño digital y crecimiento de mar
 
 ---
 
-## 🌐 Redes y proyectos
+## 🌐 Mis redes y proyectos
 
-- 🌍 **Mi web personal:** https://rodreyrj.vercel.app  
-- 📸 **Instagram:** <a href="https://www.instagram.com/rodreyrj" target="_blank">rodreyrj</a>  
-- 🐙 **GitHub:** https://github.com/rodreyrj  
+### 🔗 Enlaces con íconos SVG
+
+**📸 Instagram**  
+<a href="https://www.instagram.com/rodreyrj" target="_blank">
+  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" width="28" />
+  @rodreyrj
+</a>
+
+<br><br>
+
+**🌍 Mi página web**  
+<a href="https://rodreyrj.vercel.app" target="_blank">
+  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vercel.svg" width="28" />
+  rodreyrj.vercel.app
+</a>
+
+<br><br>
+
+**🐙 GitHub**  
+<a href="https://github.com/rodreyrj" target="_blank">
+  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" width="28" />
+  github.com/rodreyrj
+</a>
 
 ---
 
 ## 🛠️ Tecnologías que uso
 
-**Frontend:**  
-- HTML  
-- CSS  
-- JavaScript  
-- React  
-
-**Backend:**  
-- Node.js  
-
-**Herramientas:**  
-- Git  
-- Vercel  
-- Supabase  
+- **Frontend:** HTML, CSS, JavaScript, React  
+- **Backend:** Node.js  
+- **Herramientas:** Git, Vercel, Supabase  
 
 ---
 
 ## 📈 Marketing Digital & Branding
-Además del desarrollo, también me dedico a:
 
 - Estrategias de crecimiento digital  
-- Branding y creación de identidad visual  
-- Optimización para redes sociales  
-- Automatización de contenido  
-- Presencia profesional en la web  
+- Branding profesional  
+- Creación de contenido  
+- Optimización para redes  
+- Automatización de marketing  
 
 ---
 
 ## ⭐ Apóyame
 Si te gustan mis proyectos, deja una estrellita ⭐.  
-¡Siempre estoy creando y mejorando cosas nuevas!
+¡Siempre estoy creando cosas nuevas!
