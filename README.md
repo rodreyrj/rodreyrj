@@ -1,50 +1,63 @@
-👋 Hola, soy Rodreyrj
+<h1 align="center">👋 Hola, soy <strong>Rodreyrj</strong></h1>
 
-Desarrollador apasionado por crear soluciones modernas y funcionales.
-Me gusta trabajar en proyectos web, automatización y experimentar con nuevas tecnologías.
-
-
----
-
-📊 GitHub Stats
-
-
-
-
+<p align="center">
+Desarrollador Web • Automatización • Marketing Digital • Branding
+</p>
 
 ---
 
-🌐 Mis redes y proyectos
-
-🌍 Mi web personal: https://rodreyrj.vercel.app
-
-📸 Instagram: @rodreyrj
-
-🐙 GitHub: https://github.com/rodreyrj
-
-
+## 🚀 Sobre mí
+Soy un creador digital apasionado por construir proyectos modernos, rápidos y funcionales.  
+Trabajo en desarrollo web, automatización, diseño digital y crecimiento de marca.
 
 ---
 
-🚀 Tecnologías que uso
+## 📊 Mis Estadísticas de GitHub
 
-Frontend: HTML, CSS, JavaScript, React
-
-Backend: Node.js
-
-Herramientas: Git, Vercel, Supabase
-
-
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=rodreyrj&show_icons=true&theme=tokyonight" height="170" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=rodreyrj&layout=compact&theme=tokyonight" height="170" />
+</p>
 
 ---
 
-✨ Un poco sobre mí
+## 🌐 Redes y proyectos
 
-Me gusta crear proyectos limpios, rápidos y funcionales.
-Siempre aprendiendo y construyendo cosas nuevas.
-
+- 🌍 **Mi web personal:** https://rodreyrj.vercel.app  
+- 📸 **Instagram:** <a href="https://www.instagram.com/rodreyrj" target="_blank">rodreyrj</a>  
+- 🐙 **GitHub:** https://github.com/rodreyrj  
 
 ---
 
-⭐ Si te gustan mis proyectos, no dudes en dejar una estrella :)
-A otra cosa ponle que hagi marqueting Digital y quiero q tanto en Imtagram como oagina web y GitHub tengan un logo real
+## 🛠️ Tecnologías que uso
+
+**Frontend:**  
+- HTML  
+- CSS  
+- JavaScript  
+- React  
+
+**Backend:**  
+- Node.js  
+
+**Herramientas:**  
+- Git  
+- Vercel  
+- Supabase  
+
+---
+
+## 📈 Marketing Digital & Branding
+Además del desarrollo, también me dedico a:
+
+- Estrategias de crecimiento digital  
+- Branding y creación de identidad visual  
+- Optimización para redes sociales  
+- Automatización de contenido  
+- Presencia profesional en la web  
+
+---
+
+## ⭐ Apóyame
+Si te gustan mis proyectos, deja una estrellita ⭐.  
+¡Siempre estoy creando y mejorando cosas nuevas!
